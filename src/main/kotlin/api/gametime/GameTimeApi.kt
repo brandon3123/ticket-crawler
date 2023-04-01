@@ -9,17 +9,18 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
+import java.time.LocalDateTime
 
 interface GameTimeApi {
 
     @GET("/v2/listings/{eventId}")
     suspend fun getListings(@Path("eventId") eventId: String): ArrayList<Listing>
 
-    @GET(CALGARY_FLAMES_GAMES)
+    @GET("/v1/events$FLAMES_GAMES_PARAMS")
     suspend fun calgaryFlamesGames(): ArrayList<Event>
 
     companion object {
-        fun getClient(): OkHttpClient {
+        private fun getClient(): OkHttpClient {
             return OkHttpClient.Builder().build()
         }
 

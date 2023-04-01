@@ -11,7 +11,12 @@ class GameTimeService(
         return api.calgaryFlamesGames()
     }
 
-    suspend fun seats(): List<Listing> {
-        return api.getListings("62c612b069cc920001347734")
+    suspend fun seats(eventId: String): List<Listing> {
+        return api.getListings(eventId)
     }
 }
+
+fun List<Listing>.under(price: Long) =
+    filter {
+        it.price.total.longValueExact() <= price
+    }

@@ -1,0 +1,1522 @@
+{
+  "events": [
+    {
+      "event": {
+        "banner": {
+          "headline": "",
+          "subtitle": "",
+          "emoji": ""
+        },
+        "category": "nhl",
+        "center_court": {
+          "x": 147,
+          "y": 104,
+          "width": 26,
+          "height": 34
+        },
+        "datetime_local": "2023-04-02T18:00:00",
+        "datetime_utc": "2023-04-03T00:00:00",
+        "id": "62c612b069cc920001347734",
+        "map_url": "https://maps.gametime.co/v2/scotiabank_saddledome/hockey/hockey-8.png",
+        "min_price": {
+          "total": 1900,
+          "prefee": 1000
+        },
+        "name": "Anaheim Ducks at Calgary Flames ",
+        "performers": [
+          {
+            "id": "545d4af53bf3762bdb00000e",
+            "primary": true
+          },
+          {
+            "id": "544d9d2d3bf37663eb000003",
+            "primary": false
+          }
+        ],
+        "sales_cut_off": "2023-04-03T00:45:00Z",
+        "section_map_id": "5d8ede1cd7af45a10c65b680",
+        "tbd": false,
+        "time_tbd": false,
+        "date_tbd": false,
+        "venue_id": "545afc643bf3763fb9000001",
+        "venue_config": "hockey",
+        "related_events": {}
+      },
+      "performers": [
+        {
+          "abbrev": "CLG",
+          "category": "nhl",
+          "category_group": "sport",
+          "contrast_color": "FFC758FF",
+          "display_type": "performer_vs_performer",
+          "id": "545d4af53bf3762bdb00000e",
+          "hero_image_url": "https://images.gametime.co/nhlclg/hero@4x.jpg",
+          "medium_name": "CLG Flames",
+          "name": "Calgary Flames",
+          "primary_color": "E03A3EFF",
+          "short_name": "Flames",
+          "slug": "nhlclg",
+          "meta": {
+            "score_boost": null
+          }
+        },
+        {
+          "abbrev": "ANA",
+          "category": "nhl",
+          "category_group": "sport",
+          "contrast_color": "",
+          "display_type": "performer_vs_performer",
+          "id": "544d9d2d3bf37663eb000003",
+          "hero_image_url": "https://images.gametime.co/nhlana/hero@4x.jpg",
+          "medium_name": "ANA Ducks",
+          "name": "Anaheim Ducks",
+          "primary_color": "EF5225FF",
+          "short_name": "Ducks",
+          "slug": "nhlana",
+          "meta": {
+            "score_boost": null
+          }
+        }
+      ],
+      "venue": {
+        "city": "Calgary",
+        "id": "545afc643bf3763fb9000001",
+        "location": {
+          "lat": 51.0382,
+          "lon": -114.051
+        },
+        "name": "Scotiabank Saddledome",
+        "show_currency": true,
+        "slug": "scotiabank_saddledome",
+        "state": "AB",
+        "timezone": "America/Denver",
+        "metro": "calgary",
+        "image_url": "https://maps.gametime.co/v2/scotiabank_saddledome/nhl_clg/nhl_clg-8.png",
+        "meta": {
+          "score_boost": null
+        }
+      },
+      "meta": {
+        "search_score": 7.108614,
+        "score_boost": null
+      }
+    },
+    {
+      "event": {
+        "banner": {
+          "headline": "",
+          "subtitle": "",
+          "emoji": ""
+        },
+        "category": "nhl",
+        "center_court": {
+          "x": 147,
+          "y": 104,
+          "width": 26,
+          "height": 34
+        },
+        "datetime_local": "2023-04-04T19:00:00",
+        "datetime_utc": "2023-04-05T01:00:00",
+        "id": "62c612b00eda0300012dd9af",
+        "map_url": "https://maps.gametime.co/v2/scotiabank_saddledome/hockey/hockey-8.png",
+        "min_price": {
+          "total": 1100,
+          "prefee": 400
+        },
+        "name": "Chicago Blackhawks at Calgary Flames ",
+        "performers": [
+          {
+            "id": "545d4af53bf3762bdb00000e",
+            "primary": true
+          },
+          {
+            "id": "530445733bf3767835000006",
+            "primary": false
+          }
+        ],
+        "sales_cut_off": "2023-04-05T01:45:00Z",
+        "section_map_id": "5d8ede1cd7af45a10c65b680",
+        "tbd": false,
+        "time_tbd": false,
+        "date_tbd": false,
+        "venue_id": "545afc643bf3763fb9000001",
+        "venue_config": "hockey",
+        "related_events": {}
+      },
+      "performers": [
+        {
+          "abbrev": "CLG",
+          "category": "nhl",
+          "category_group": "sport",
+          "contrast_color": "FFC758FF",
+          "display_type": "performer_vs_performer",
+          "id": "545d4af53bf3762bdb00000e",
+          "hero_image_url": "https://images.gametime.co/nhlclg/hero@4x.jpg",
+          "medium_name": "CLG Flames",
+          "name": "Calgary Flames",
+          "primary_color": "E03A3EFF",
+          "short_name": "Flames",
+          "slug": "nhlclg",
+          "meta": {
+            "score_boost": null
+          }
+        },
+        {
+          "abbrev": "CHI",
+          "category": "nhl",
+          "category_group": "sport",
+          "contrast_color": "",
+          "display_type": "performer_vs_performer",
+          "id": "530445733bf3767835000006",
+          "hero_image_url": "https://images.gametime.co/nhlchi/hero@4x.jpg",
+          "medium_name": "CHI Blackhawks",
+          "name": "Chicago Blackhawks",
+          "primary_color": "E3263AFF",
+          "short_name": "Blackhawks",
+          "slug": "nhlchi",
+          "meta": {
+            "score_boost": null
+          }
+        }
+      ],
+      "venue": {
+        "city": "Calgary",
+        "id": "545afc643bf3763fb9000001",
+        "location": {
+          "lat": 51.0382,
+          "lon": -114.051
+        },
+        "name": "Scotiabank Saddledome",
+        "show_currency": true,
+        "slug": "scotiabank_saddledome",
+        "state": "AB",
+        "timezone": "America/Denver",
+        "metro": "calgary",
+        "image_url": "https://maps.gametime.co/v2/scotiabank_saddledome/nhl_clg/nhl_clg-8.png",
+        "meta": {
+          "score_boost": null
+        }
+      },
+      "meta": {
+        "search_score": 7.108614,
+        "score_boost": null
+      }
+    },
+    {
+      "event": {
+        "banner": {
+          "headline": "",
+          "subtitle": "",
+          "emoji": ""
+        },
+        "category": "nhl",
+        "center_court": {
+          "x": 147,
+          "y": 104,
+          "width": 26,
+          "height": 34
+        },
+        "datetime_local": "2023-04-10T19:30:00",
+        "datetime_utc": "2023-04-11T01:30:00",
+        "id": "62c612b1441c490001729a64",
+        "map_url": "https://maps.gametime.co/v2/scotiabank_saddledome/hockey/hockey-8.png",
+        "min_price": {
+          "total": 1400,
+          "prefee": 600
+        },
+        "name": "Nashville Predators at Calgary Flames ",
+        "performers": [
+          {
+            "id": "545d4af53bf3762bdb00000e",
+            "primary": true
+          },
+          {
+            "id": "55305b7478fea5330c000003",
+            "primary": false
+          }
+        ],
+        "sales_cut_off": "2023-04-11T02:15:00Z",
+        "section_map_id": "5d8ede1cd7af45a10c65b680",
+        "tbd": false,
+        "time_tbd": false,
+        "date_tbd": false,
+        "venue_id": "545afc643bf3763fb9000001",
+        "venue_config": "hockey",
+        "related_events": {}
+      },
+      "performers": [
+        {
+          "abbrev": "CLG",
+          "category": "nhl",
+          "category_group": "sport",
+          "contrast_color": "FFC758FF",
+          "display_type": "performer_vs_performer",
+          "id": "545d4af53bf3762bdb00000e",
+          "hero_image_url": "https://images.gametime.co/nhlclg/hero@4x.jpg",
+          "medium_name": "CLG Flames",
+          "name": "Calgary Flames",
+          "primary_color": "E03A3EFF",
+          "short_name": "Flames",
+          "slug": "nhlclg",
+          "meta": {
+            "score_boost": null
+          }
+        },
+        {
+          "abbrev": "NSH",
+          "category": "nhl",
+          "category_group": "sport",
+          "contrast_color": "FDBB2FFF",
+          "display_type": "performer_vs_performer",
+          "id": "55305b7478fea5330c000003",
+          "hero_image_url": "https://images.gametime.co/nhlnsh/hero@4x.jpg",
+          "medium_name": "NSH Predators",
+          "name": "Nashville Predators",
+          "primary_color": "002E62FF",
+          "short_name": "Predators",
+          "slug": "nhlnsh",
+          "meta": {
+            "score_boost": null
+          }
+        }
+      ],
+      "venue": {
+        "city": "Calgary",
+        "id": "545afc643bf3763fb9000001",
+        "location": {
+          "lat": 51.0382,
+          "lon": -114.051
+        },
+        "name": "Scotiabank Saddledome",
+        "show_currency": true,
+        "slug": "scotiabank_saddledome",
+        "state": "AB",
+        "timezone": "America/Denver",
+        "metro": "calgary",
+        "image_url": "https://maps.gametime.co/v2/scotiabank_saddledome/nhl_clg/nhl_clg-8.png",
+        "meta": {
+          "score_boost": null
+        }
+      },
+      "meta": {
+        "search_score": 7.108614,
+        "score_boost": null
+      }
+    },
+    {
+      "event": {
+        "banner": {
+          "headline": "",
+          "subtitle": "",
+          "emoji": ""
+        },
+        "category": "nhl",
+        "center_court": {
+          "x": 147,
+          "y": 104,
+          "width": 26,
+          "height": 34
+        },
+        "datetime_local": "2023-04-12T20:00:00",
+        "datetime_utc": "2023-04-13T02:00:00",
+        "id": "62c612b39840900001faea0a",
+        "map_url": "https://maps.gametime.co/v2/scotiabank_saddledome/hockey/hockey-8.png",
+        "min_price": {
+          "total": 1400,
+          "prefee": 600
+        },
+        "name": "San Jose Sharks at Calgary Flames ",
+        "performers": [
+          {
+            "id": "545d4af53bf3762bdb00000e",
+            "primary": true
+          },
+          {
+            "id": "5270135d3bf376613a000002",
+            "primary": false
+          }
+        ],
+        "sales_cut_off": "2023-04-13T02:45:00Z",
+        "section_map_id": "5d8ede1cd7af45a10c65b680",
+        "tbd": false,
+        "time_tbd": false,
+        "date_tbd": false,
+        "venue_id": "545afc643bf3763fb9000001",
+        "venue_config": "hockey",
+        "related_events": {}
+      },
+      "performers": [
+        {
+          "abbrev": "CLG",
+          "category": "nhl",
+          "category_group": "sport",
+          "contrast_color": "FFC758FF",
+          "display_type": "performer_vs_performer",
+          "id": "545d4af53bf3762bdb00000e",
+          "hero_image_url": "https://images.gametime.co/nhlclg/hero@4x.jpg",
+          "medium_name": "CLG Flames",
+          "name": "Calgary Flames",
+          "primary_color": "E03A3EFF",
+          "short_name": "Flames",
+          "slug": "nhlclg",
+          "meta": {
+            "score_boost": null
+          }
+        },
+        {
+          "abbrev": "SJ",
+          "category": "nhl",
+          "category_group": "sport",
+          "contrast_color": "",
+          "display_type": "performer_vs_performer",
+          "id": "5270135d3bf376613a000002",
+          "hero_image_url": "https://images.gametime.co/nhlsjs/hero@4x.jpg",
+          "medium_name": "SJ Sharks",
+          "name": "San Jose Sharks",
+          "primary_color": "1C6EABFF",
+          "short_name": "Sharks",
+          "slug": "nhlsjs",
+          "meta": {
+            "score_boost": null
+          }
+        }
+      ],
+      "venue": {
+        "city": "Calgary",
+        "id": "545afc643bf3763fb9000001",
+        "location": {
+          "lat": 51.0382,
+          "lon": -114.051
+        },
+        "name": "Scotiabank Saddledome",
+        "show_currency": true,
+        "slug": "scotiabank_saddledome",
+        "state": "AB",
+        "timezone": "America/Denver",
+        "metro": "calgary",
+        "image_url": "https://maps.gametime.co/v2/scotiabank_saddledome/nhl_clg/nhl_clg-8.png",
+        "meta": {
+          "score_boost": null
+        }
+      },
+      "meta": {
+        "search_score": 7.108614,
+        "score_boost": null
+      }
+    },
+    {
+      "event": {
+        "banner": {
+          "headline": "",
+          "subtitle": "",
+          "emoji": ""
+        },
+        "category": "nhl",
+        "center_court": {
+          "x": 147,
+          "y": 104,
+          "width": 26,
+          "height": 34
+        },
+        "datetime_local": "2023-04-17T03:30:00",
+        "datetime_utc": "2023-04-17T09:30:00",
+        "id": "63e41cbddd180e0001d44cd8",
+        "map_url": "https://maps.gametime.co/v2/scotiabank_saddledome/hockey/hockey-8.png",
+        "min_price": {
+          "total": 38900,
+          "prefee": 28600
+        },
+        "name": "Western Conference First Round: TBD at Calgary Flames - Home Game 1",
+        "performers": [
+          {
+            "id": "545d4af53bf3762bdb00000e",
+            "primary": true
+          },
+          {
+            "id": "5a99e2126311820014498a01",
+            "primary": false
+          }
+        ],
+        "sales_cut_off": "2023-04-17T10:15:00Z",
+        "section_map_id": "5d8ede1cd7af45a10c65b680",
+        "tbd": true,
+        "time_tbd": true,
+        "date_tbd": true,
+        "venue_id": "545afc643bf3763fb9000001",
+        "venue_config": "hockey",
+        "related_events": {}
+      },
+      "performers": [
+        {
+          "abbrev": "CLG",
+          "category": "nhl",
+          "category_group": "sport",
+          "contrast_color": "FFC758FF",
+          "display_type": "performer_vs_performer",
+          "id": "545d4af53bf3762bdb00000e",
+          "hero_image_url": "https://images.gametime.co/nhlclg/hero@4x.jpg",
+          "medium_name": "CLG Flames",
+          "name": "Calgary Flames",
+          "primary_color": "E03A3EFF",
+          "short_name": "Flames",
+          "slug": "nhlclg",
+          "meta": {
+            "score_boost": null
+          }
+        },
+        {
+          "abbrev": "TBD",
+          "category": "other",
+          "category_group": "sport",
+          "contrast_color": "",
+          "display_type": "performer_vs_performer",
+          "id": "5a99e2126311820014498a01",
+          "hero_image_url": "https://images.gametime.co/othertbd/hero@4x.jpg",
+          "medium_name": "TBD",
+          "name": "TBD",
+          "primary_color": "d6d0d0FF",
+          "short_name": "TBD",
+          "slug": "othertbd",
+          "meta": {
+            "score_boost": null
+          }
+        }
+      ],
+      "venue": {
+        "city": "Calgary",
+        "id": "545afc643bf3763fb9000001",
+        "location": {
+          "lat": 51.0382,
+          "lon": -114.051
+        },
+        "name": "Scotiabank Saddledome",
+        "show_currency": true,
+        "slug": "scotiabank_saddledome",
+        "state": "AB",
+        "timezone": "America/Denver",
+        "metro": "calgary",
+        "image_url": "https://maps.gametime.co/v2/scotiabank_saddledome/nhl_clg/nhl_clg-8.png",
+        "meta": {
+          "score_boost": null
+        }
+      },
+      "meta": {
+        "search_score": 7.108614,
+        "score_boost": null
+      }
+    },
+    {
+      "event": {
+        "banner": {
+          "headline": "",
+          "subtitle": "",
+          "emoji": ""
+        },
+        "category": "nhl",
+        "center_court": {
+          "x": 147,
+          "y": 104,
+          "width": 26,
+          "height": 34
+        },
+        "datetime_local": "2023-04-19T03:30:00",
+        "datetime_utc": "2023-04-19T09:30:00",
+        "id": "63e41cc0b7f849000187b832",
+        "map_url": "https://maps.gametime.co/v2/scotiabank_saddledome/hockey/hockey-8.png",
+        "min_price": {
+          "total": 55400,
+          "prefee": 40900
+        },
+        "name": "Western Conference First Round: TBD at Calgary Flames - Home Game 2",
+        "performers": [
+          {
+            "id": "545d4af53bf3762bdb00000e",
+            "primary": true
+          },
+          {
+            "id": "5a99e2126311820014498a01",
+            "primary": false
+          }
+        ],
+        "sales_cut_off": "2023-04-19T10:15:00Z",
+        "section_map_id": "5d8ede1cd7af45a10c65b680",
+        "tbd": true,
+        "time_tbd": true,
+        "date_tbd": true,
+        "venue_id": "545afc643bf3763fb9000001",
+        "venue_config": "hockey",
+        "related_events": {}
+      },
+      "performers": [
+        {
+          "abbrev": "CLG",
+          "category": "nhl",
+          "category_group": "sport",
+          "contrast_color": "FFC758FF",
+          "display_type": "performer_vs_performer",
+          "id": "545d4af53bf3762bdb00000e",
+          "hero_image_url": "https://images.gametime.co/nhlclg/hero@4x.jpg",
+          "medium_name": "CLG Flames",
+          "name": "Calgary Flames",
+          "primary_color": "E03A3EFF",
+          "short_name": "Flames",
+          "slug": "nhlclg",
+          "meta": {
+            "score_boost": null
+          }
+        },
+        {
+          "abbrev": "TBD",
+          "category": "other",
+          "category_group": "sport",
+          "contrast_color": "",
+          "display_type": "performer_vs_performer",
+          "id": "5a99e2126311820014498a01",
+          "hero_image_url": "https://images.gametime.co/othertbd/hero@4x.jpg",
+          "medium_name": "TBD",
+          "name": "TBD",
+          "primary_color": "d6d0d0FF",
+          "short_name": "TBD",
+          "slug": "othertbd",
+          "meta": {
+            "score_boost": null
+          }
+        }
+      ],
+      "venue": {
+        "city": "Calgary",
+        "id": "545afc643bf3763fb9000001",
+        "location": {
+          "lat": 51.0382,
+          "lon": -114.051
+        },
+        "name": "Scotiabank Saddledome",
+        "show_currency": true,
+        "slug": "scotiabank_saddledome",
+        "state": "AB",
+        "timezone": "America/Denver",
+        "metro": "calgary",
+        "image_url": "https://maps.gametime.co/v2/scotiabank_saddledome/nhl_clg/nhl_clg-8.png",
+        "meta": {
+          "score_boost": null
+        }
+      },
+      "meta": {
+        "search_score": 7.108614,
+        "score_boost": null
+      }
+    },
+    {
+      "event": {
+        "banner": {
+          "headline": "",
+          "subtitle": "",
+          "emoji": ""
+        },
+        "category": "nhl",
+        "center_court": {
+          "x": 147,
+          "y": 104,
+          "width": 26,
+          "height": 34
+        },
+        "datetime_local": "2023-04-25T03:30:00",
+        "datetime_utc": "2023-04-25T09:30:00",
+        "id": "63e41cd2c3688f00019798c5",
+        "map_url": "https://maps.gametime.co/v2/scotiabank_saddledome/hockey/hockey-8.png",
+        "min_price": {
+          "total": 77400,
+          "prefee": 57300
+        },
+        "name": "Western Conference First Round: TBD at Calgary Flames - Home Game 3",
+        "performers": [
+          {
+            "id": "545d4af53bf3762bdb00000e",
+            "primary": true
+          },
+          {
+            "id": "5a99e2126311820014498a01",
+            "primary": false
+          }
+        ],
+        "sales_cut_off": "2023-04-25T10:15:00Z",
+        "section_map_id": "5d8ede1cd7af45a10c65b680",
+        "tbd": true,
+        "time_tbd": true,
+        "date_tbd": true,
+        "venue_id": "545afc643bf3763fb9000001",
+        "venue_config": "hockey",
+        "related_events": {}
+      },
+      "performers": [
+        {
+          "abbrev": "CLG",
+          "category": "nhl",
+          "category_group": "sport",
+          "contrast_color": "FFC758FF",
+          "display_type": "performer_vs_performer",
+          "id": "545d4af53bf3762bdb00000e",
+          "hero_image_url": "https://images.gametime.co/nhlclg/hero@4x.jpg",
+          "medium_name": "CLG Flames",
+          "name": "Calgary Flames",
+          "primary_color": "E03A3EFF",
+          "short_name": "Flames",
+          "slug": "nhlclg",
+          "meta": {
+            "score_boost": null
+          }
+        },
+        {
+          "abbrev": "TBD",
+          "category": "other",
+          "category_group": "sport",
+          "contrast_color": "",
+          "display_type": "performer_vs_performer",
+          "id": "5a99e2126311820014498a01",
+          "hero_image_url": "https://images.gametime.co/othertbd/hero@4x.jpg",
+          "medium_name": "TBD",
+          "name": "TBD",
+          "primary_color": "d6d0d0FF",
+          "short_name": "TBD",
+          "slug": "othertbd",
+          "meta": {
+            "score_boost": null
+          }
+        }
+      ],
+      "venue": {
+        "city": "Calgary",
+        "id": "545afc643bf3763fb9000001",
+        "location": {
+          "lat": 51.0382,
+          "lon": -114.051
+        },
+        "name": "Scotiabank Saddledome",
+        "show_currency": true,
+        "slug": "scotiabank_saddledome",
+        "state": "AB",
+        "timezone": "America/Denver",
+        "metro": "calgary",
+        "image_url": "https://maps.gametime.co/v2/scotiabank_saddledome/nhl_clg/nhl_clg-8.png",
+        "meta": {
+          "score_boost": null
+        }
+      },
+      "meta": {
+        "search_score": 7.108614,
+        "score_boost": null
+      }
+    },
+    {
+      "event": {
+        "banner": {
+          "headline": "",
+          "subtitle": "",
+          "emoji": ""
+        },
+        "category": "nhl",
+        "center_court": {
+          "x": 147,
+          "y": 104,
+          "width": 26,
+          "height": 34
+        },
+        "datetime_local": "2023-04-29T03:30:00",
+        "datetime_utc": "2023-04-29T09:30:00",
+        "id": "63e41cdc92985a0001b9133f",
+        "map_url": "https://maps.gametime.co/v2/scotiabank_saddledome/hockey/hockey-8.png",
+        "min_price": {
+          "total": 110400,
+          "prefee": 82000
+        },
+        "name": "Western Conference First Round: TBD at Calgary Flames - Home Game 4",
+        "performers": [
+          {
+            "id": "545d4af53bf3762bdb00000e",
+            "primary": true
+          },
+          {
+            "id": "5a99e2126311820014498a01",
+            "primary": false
+          }
+        ],
+        "sales_cut_off": "2023-04-29T10:15:00Z",
+        "section_map_id": "5d8ede1cd7af45a10c65b680",
+        "tbd": true,
+        "time_tbd": true,
+        "date_tbd": true,
+        "venue_id": "545afc643bf3763fb9000001",
+        "venue_config": "hockey",
+        "related_events": {}
+      },
+      "performers": [
+        {
+          "abbrev": "CLG",
+          "category": "nhl",
+          "category_group": "sport",
+          "contrast_color": "FFC758FF",
+          "display_type": "performer_vs_performer",
+          "id": "545d4af53bf3762bdb00000e",
+          "hero_image_url": "https://images.gametime.co/nhlclg/hero@4x.jpg",
+          "medium_name": "CLG Flames",
+          "name": "Calgary Flames",
+          "primary_color": "E03A3EFF",
+          "short_name": "Flames",
+          "slug": "nhlclg",
+          "meta": {
+            "score_boost": null
+          }
+        },
+        {
+          "abbrev": "TBD",
+          "category": "other",
+          "category_group": "sport",
+          "contrast_color": "",
+          "display_type": "performer_vs_performer",
+          "id": "5a99e2126311820014498a01",
+          "hero_image_url": "https://images.gametime.co/othertbd/hero@4x.jpg",
+          "medium_name": "TBD",
+          "name": "TBD",
+          "primary_color": "d6d0d0FF",
+          "short_name": "TBD",
+          "slug": "othertbd",
+          "meta": {
+            "score_boost": null
+          }
+        }
+      ],
+      "venue": {
+        "city": "Calgary",
+        "id": "545afc643bf3763fb9000001",
+        "location": {
+          "lat": 51.0382,
+          "lon": -114.051
+        },
+        "name": "Scotiabank Saddledome",
+        "show_currency": true,
+        "slug": "scotiabank_saddledome",
+        "state": "AB",
+        "timezone": "America/Denver",
+        "metro": "calgary",
+        "image_url": "https://maps.gametime.co/v2/scotiabank_saddledome/nhl_clg/nhl_clg-8.png",
+        "meta": {
+          "score_boost": null
+        }
+      },
+      "meta": {
+        "search_score": 7.108614,
+        "score_boost": null
+      }
+    },
+    {
+      "event": {
+        "banner": {
+          "headline": "",
+          "subtitle": "",
+          "emoji": ""
+        },
+        "category": "nhl",
+        "center_court": {
+          "x": 147,
+          "y": 104,
+          "width": 26,
+          "height": 34
+        },
+        "datetime_local": "2023-05-02T03:30:00",
+        "datetime_utc": "2023-05-02T09:30:00",
+        "id": "63e41ce331b4bc00016acb1b",
+        "map_url": "https://maps.gametime.co/v2/scotiabank_saddledome/hockey/hockey-8.png",
+        "min_price": {
+          "total": 126900,
+          "prefee": 94300
+        },
+        "name": "Western Conference Second Round: TBD at Calgary Flames - Home Game 1",
+        "performers": [
+          {
+            "id": "545d4af53bf3762bdb00000e",
+            "primary": true
+          },
+          {
+            "id": "5a99e2126311820014498a01",
+            "primary": false
+          }
+        ],
+        "sales_cut_off": "2023-05-02T10:15:00Z",
+        "section_map_id": "5d8ede1cd7af45a10c65b680",
+        "tbd": true,
+        "time_tbd": true,
+        "date_tbd": true,
+        "venue_id": "545afc643bf3763fb9000001",
+        "venue_config": "hockey",
+        "related_events": {}
+      },
+      "performers": [
+        {
+          "abbrev": "CLG",
+          "category": "nhl",
+          "category_group": "sport",
+          "contrast_color": "FFC758FF",
+          "display_type": "performer_vs_performer",
+          "id": "545d4af53bf3762bdb00000e",
+          "hero_image_url": "https://images.gametime.co/nhlclg/hero@4x.jpg",
+          "medium_name": "CLG Flames",
+          "name": "Calgary Flames",
+          "primary_color": "E03A3EFF",
+          "short_name": "Flames",
+          "slug": "nhlclg",
+          "meta": {
+            "score_boost": null
+          }
+        },
+        {
+          "abbrev": "TBD",
+          "category": "other",
+          "category_group": "sport",
+          "contrast_color": "",
+          "display_type": "performer_vs_performer",
+          "id": "5a99e2126311820014498a01",
+          "hero_image_url": "https://images.gametime.co/othertbd/hero@4x.jpg",
+          "medium_name": "TBD",
+          "name": "TBD",
+          "primary_color": "d6d0d0FF",
+          "short_name": "TBD",
+          "slug": "othertbd",
+          "meta": {
+            "score_boost": null
+          }
+        }
+      ],
+      "venue": {
+        "city": "Calgary",
+        "id": "545afc643bf3763fb9000001",
+        "location": {
+          "lat": 51.0382,
+          "lon": -114.051
+        },
+        "name": "Scotiabank Saddledome",
+        "show_currency": true,
+        "slug": "scotiabank_saddledome",
+        "state": "AB",
+        "timezone": "America/Denver",
+        "metro": "calgary",
+        "image_url": "https://maps.gametime.co/v2/scotiabank_saddledome/nhl_clg/nhl_clg-8.png",
+        "meta": {
+          "score_boost": null
+        }
+      },
+      "meta": {
+        "search_score": 7.108614,
+        "score_boost": null
+      }
+    },
+    {
+      "event": {
+        "banner": {
+          "headline": "",
+          "subtitle": "",
+          "emoji": ""
+        },
+        "category": "nhl",
+        "center_court": {
+          "x": 147,
+          "y": 104,
+          "width": 26,
+          "height": 34
+        },
+        "datetime_local": "2023-05-04T03:30:00",
+        "datetime_utc": "2023-05-04T09:30:00",
+        "id": "63e41ce7a4379500010451cd",
+        "map_url": "https://maps.gametime.co/v2/scotiabank_saddledome/hockey/hockey-8.png",
+        "min_price": {
+          "total": 149000,
+          "prefee": 110800
+        },
+        "name": "Western Conference Second Round: TBD at Calgary Flames - Home Game 2",
+        "performers": [
+          {
+            "id": "545d4af53bf3762bdb00000e",
+            "primary": true
+          },
+          {
+            "id": "5a99e2126311820014498a01",
+            "primary": false
+          }
+        ],
+        "sales_cut_off": "2023-05-04T10:15:00Z",
+        "section_map_id": "5d8ede1cd7af45a10c65b680",
+        "tbd": true,
+        "time_tbd": true,
+        "date_tbd": true,
+        "venue_id": "545afc643bf3763fb9000001",
+        "venue_config": "hockey",
+        "related_events": {}
+      },
+      "performers": [
+        {
+          "abbrev": "CLG",
+          "category": "nhl",
+          "category_group": "sport",
+          "contrast_color": "FFC758FF",
+          "display_type": "performer_vs_performer",
+          "id": "545d4af53bf3762bdb00000e",
+          "hero_image_url": "https://images.gametime.co/nhlclg/hero@4x.jpg",
+          "medium_name": "CLG Flames",
+          "name": "Calgary Flames",
+          "primary_color": "E03A3EFF",
+          "short_name": "Flames",
+          "slug": "nhlclg",
+          "meta": {
+            "score_boost": null
+          }
+        },
+        {
+          "abbrev": "TBD",
+          "category": "other",
+          "category_group": "sport",
+          "contrast_color": "",
+          "display_type": "performer_vs_performer",
+          "id": "5a99e2126311820014498a01",
+          "hero_image_url": "https://images.gametime.co/othertbd/hero@4x.jpg",
+          "medium_name": "TBD",
+          "name": "TBD",
+          "primary_color": "d6d0d0FF",
+          "short_name": "TBD",
+          "slug": "othertbd",
+          "meta": {
+            "score_boost": null
+          }
+        }
+      ],
+      "venue": {
+        "city": "Calgary",
+        "id": "545afc643bf3763fb9000001",
+        "location": {
+          "lat": 51.0382,
+          "lon": -114.051
+        },
+        "name": "Scotiabank Saddledome",
+        "show_currency": true,
+        "slug": "scotiabank_saddledome",
+        "state": "AB",
+        "timezone": "America/Denver",
+        "metro": "calgary",
+        "image_url": "https://maps.gametime.co/v2/scotiabank_saddledome/nhl_clg/nhl_clg-8.png",
+        "meta": {
+          "score_boost": null
+        }
+      },
+      "meta": {
+        "search_score": 7.108614,
+        "score_boost": null
+      }
+    },
+    {
+      "event": {
+        "banner": {
+          "headline": "",
+          "subtitle": "",
+          "emoji": ""
+        },
+        "category": "nhl",
+        "center_court": {
+          "x": 147,
+          "y": 104,
+          "width": 26,
+          "height": 34
+        },
+        "datetime_local": "2023-05-10T03:30:00",
+        "datetime_utc": "2023-05-10T09:30:00",
+        "id": "63e41cf95f602c0001fe2890",
+        "map_url": "https://maps.gametime.co/v2/scotiabank_saddledome/hockey/hockey-8.png",
+        "min_price": {
+          "total": 1090000,
+          "prefee": 813000
+        },
+        "name": "Western Conference Second Round: TBD at Calgary Flames - Home Game 3",
+        "performers": [
+          {
+            "id": "545d4af53bf3762bdb00000e",
+            "primary": true
+          },
+          {
+            "id": "5a99e2126311820014498a01",
+            "primary": false
+          }
+        ],
+        "sales_cut_off": "2023-05-10T10:15:00Z",
+        "section_map_id": "5d8ede1cd7af45a10c65b680",
+        "tbd": true,
+        "time_tbd": true,
+        "date_tbd": true,
+        "venue_id": "545afc643bf3763fb9000001",
+        "venue_config": "hockey",
+        "related_events": {}
+      },
+      "performers": [
+        {
+          "abbrev": "CLG",
+          "category": "nhl",
+          "category_group": "sport",
+          "contrast_color": "FFC758FF",
+          "display_type": "performer_vs_performer",
+          "id": "545d4af53bf3762bdb00000e",
+          "hero_image_url": "https://images.gametime.co/nhlclg/hero@4x.jpg",
+          "medium_name": "CLG Flames",
+          "name": "Calgary Flames",
+          "primary_color": "E03A3EFF",
+          "short_name": "Flames",
+          "slug": "nhlclg",
+          "meta": {
+            "score_boost": null
+          }
+        },
+        {
+          "abbrev": "TBD",
+          "category": "other",
+          "category_group": "sport",
+          "contrast_color": "",
+          "display_type": "performer_vs_performer",
+          "id": "5a99e2126311820014498a01",
+          "hero_image_url": "https://images.gametime.co/othertbd/hero@4x.jpg",
+          "medium_name": "TBD",
+          "name": "TBD",
+          "primary_color": "d6d0d0FF",
+          "short_name": "TBD",
+          "slug": "othertbd",
+          "meta": {
+            "score_boost": null
+          }
+        }
+      ],
+      "venue": {
+        "city": "Calgary",
+        "id": "545afc643bf3763fb9000001",
+        "location": {
+          "lat": 51.0382,
+          "lon": -114.051
+        },
+        "name": "Scotiabank Saddledome",
+        "show_currency": true,
+        "slug": "scotiabank_saddledome",
+        "state": "AB",
+        "timezone": "America/Denver",
+        "metro": "calgary",
+        "image_url": "https://maps.gametime.co/v2/scotiabank_saddledome/nhl_clg/nhl_clg-8.png",
+        "meta": {
+          "score_boost": null
+        }
+      },
+      "meta": {
+        "search_score": 7.108614,
+        "score_boost": null
+      }
+    },
+    {
+      "event": {
+        "banner": {
+          "headline": "",
+          "subtitle": "",
+          "emoji": ""
+        },
+        "category": "nhl",
+        "center_court": {
+          "x": 147,
+          "y": 104,
+          "width": 26,
+          "height": 34
+        },
+        "datetime_local": "2023-05-14T03:30:00",
+        "datetime_utc": "2023-05-14T09:30:00",
+        "id": "63e41d0787ad350001e8881c",
+        "map_url": "https://maps.gametime.co/v2/scotiabank_saddledome/hockey/hockey-8.png",
+        "min_price": {
+          "total": 1090000,
+          "prefee": 813000
+        },
+        "name": "Western Conference Second Round: TBD at Calgary Flames - Home Game 4",
+        "performers": [
+          {
+            "id": "545d4af53bf3762bdb00000e",
+            "primary": true
+          },
+          {
+            "id": "5a99e2126311820014498a01",
+            "primary": false
+          }
+        ],
+        "sales_cut_off": "2023-05-14T10:15:00Z",
+        "section_map_id": "5d8ede1cd7af45a10c65b680",
+        "tbd": true,
+        "time_tbd": true,
+        "date_tbd": true,
+        "venue_id": "545afc643bf3763fb9000001",
+        "venue_config": "hockey",
+        "related_events": {}
+      },
+      "performers": [
+        {
+          "abbrev": "CLG",
+          "category": "nhl",
+          "category_group": "sport",
+          "contrast_color": "FFC758FF",
+          "display_type": "performer_vs_performer",
+          "id": "545d4af53bf3762bdb00000e",
+          "hero_image_url": "https://images.gametime.co/nhlclg/hero@4x.jpg",
+          "medium_name": "CLG Flames",
+          "name": "Calgary Flames",
+          "primary_color": "E03A3EFF",
+          "short_name": "Flames",
+          "slug": "nhlclg",
+          "meta": {
+            "score_boost": null
+          }
+        },
+        {
+          "abbrev": "TBD",
+          "category": "other",
+          "category_group": "sport",
+          "contrast_color": "",
+          "display_type": "performer_vs_performer",
+          "id": "5a99e2126311820014498a01",
+          "hero_image_url": "https://images.gametime.co/othertbd/hero@4x.jpg",
+          "medium_name": "TBD",
+          "name": "TBD",
+          "primary_color": "d6d0d0FF",
+          "short_name": "TBD",
+          "slug": "othertbd",
+          "meta": {
+            "score_boost": null
+          }
+        }
+      ],
+      "venue": {
+        "city": "Calgary",
+        "id": "545afc643bf3763fb9000001",
+        "location": {
+          "lat": 51.0382,
+          "lon": -114.051
+        },
+        "name": "Scotiabank Saddledome",
+        "show_currency": true,
+        "slug": "scotiabank_saddledome",
+        "state": "AB",
+        "timezone": "America/Denver",
+        "metro": "calgary",
+        "image_url": "https://maps.gametime.co/v2/scotiabank_saddledome/nhl_clg/nhl_clg-8.png",
+        "meta": {
+          "score_boost": null
+        }
+      },
+      "meta": {
+        "search_score": 7.108614,
+        "score_boost": null
+      }
+    },
+    {
+      "event": {
+        "banner": {
+          "headline": "",
+          "subtitle": "",
+          "emoji": ""
+        },
+        "category": "nhl",
+        "center_court": {
+          "x": 147,
+          "y": 104,
+          "width": 26,
+          "height": 34
+        },
+        "datetime_local": "2023-05-15T03:30:00",
+        "datetime_utc": "2023-05-15T09:30:00",
+        "id": "63e41d0b833a290001a19217",
+        "map_url": "https://maps.gametime.co/v2/scotiabank_saddledome/hockey/hockey-8.png",
+        "min_price": {
+          "total": 0,
+          "prefee": 0
+        },
+        "name": "Western Conference Finals: TBD at Calgary Flames - Home Game 1",
+        "performers": [
+          {
+            "id": "545d4af53bf3762bdb00000e",
+            "primary": true
+          },
+          {
+            "id": "5a99e2126311820014498a01",
+            "primary": false
+          }
+        ],
+        "sales_cut_off": "2023-05-15T10:15:00Z",
+        "section_map_id": "5d8ede1cd7af45a10c65b680",
+        "tbd": true,
+        "time_tbd": true,
+        "date_tbd": true,
+        "venue_id": "545afc643bf3763fb9000001",
+        "venue_config": "hockey",
+        "related_events": {}
+      },
+      "performers": [
+        {
+          "abbrev": "CLG",
+          "category": "nhl",
+          "category_group": "sport",
+          "contrast_color": "FFC758FF",
+          "display_type": "performer_vs_performer",
+          "id": "545d4af53bf3762bdb00000e",
+          "hero_image_url": "https://images.gametime.co/nhlclg/hero@4x.jpg",
+          "medium_name": "CLG Flames",
+          "name": "Calgary Flames",
+          "primary_color": "E03A3EFF",
+          "short_name": "Flames",
+          "slug": "nhlclg",
+          "meta": {
+            "score_boost": null
+          }
+        },
+        {
+          "abbrev": "TBD",
+          "category": "other",
+          "category_group": "sport",
+          "contrast_color": "",
+          "display_type": "performer_vs_performer",
+          "id": "5a99e2126311820014498a01",
+          "hero_image_url": "https://images.gametime.co/othertbd/hero@4x.jpg",
+          "medium_name": "TBD",
+          "name": "TBD",
+          "primary_color": "d6d0d0FF",
+          "short_name": "TBD",
+          "slug": "othertbd",
+          "meta": {
+            "score_boost": null
+          }
+        }
+      ],
+      "venue": {
+        "city": "Calgary",
+        "id": "545afc643bf3763fb9000001",
+        "location": {
+          "lat": 51.0382,
+          "lon": -114.051
+        },
+        "name": "Scotiabank Saddledome",
+        "show_currency": true,
+        "slug": "scotiabank_saddledome",
+        "state": "AB",
+        "timezone": "America/Denver",
+        "metro": "calgary",
+        "image_url": "https://maps.gametime.co/v2/scotiabank_saddledome/nhl_clg/nhl_clg-8.png",
+        "meta": {
+          "score_boost": null
+        }
+      },
+      "meta": {
+        "search_score": 7.108614,
+        "score_boost": null
+      }
+    },
+    {
+      "event": {
+        "banner": {
+          "headline": "",
+          "subtitle": "",
+          "emoji": ""
+        },
+        "category": "nhl",
+        "center_court": {
+          "x": 147,
+          "y": 104,
+          "width": 26,
+          "height": 34
+        },
+        "datetime_local": "2023-05-17T03:30:00",
+        "datetime_utc": "2023-05-17T09:30:00",
+        "id": "63e41d0fc3688f00019798c8",
+        "map_url": "https://maps.gametime.co/v2/scotiabank_saddledome/hockey/hockey-8.png",
+        "min_price": {
+          "total": 0,
+          "prefee": 0
+        },
+        "name": "Western Conference Finals: TBD at Calgary Flames - Home Game 2",
+        "performers": [
+          {
+            "id": "545d4af53bf3762bdb00000e",
+            "primary": true
+          },
+          {
+            "id": "5a99e2126311820014498a01",
+            "primary": false
+          }
+        ],
+        "sales_cut_off": "2023-05-17T10:15:00Z",
+        "section_map_id": "5d8ede1cd7af45a10c65b680",
+        "tbd": true,
+        "time_tbd": true,
+        "date_tbd": true,
+        "venue_id": "545afc643bf3763fb9000001",
+        "venue_config": "hockey",
+        "related_events": {}
+      },
+      "performers": [
+        {
+          "abbrev": "CLG",
+          "category": "nhl",
+          "category_group": "sport",
+          "contrast_color": "FFC758FF",
+          "display_type": "performer_vs_performer",
+          "id": "545d4af53bf3762bdb00000e",
+          "hero_image_url": "https://images.gametime.co/nhlclg/hero@4x.jpg",
+          "medium_name": "CLG Flames",
+          "name": "Calgary Flames",
+          "primary_color": "E03A3EFF",
+          "short_name": "Flames",
+          "slug": "nhlclg",
+          "meta": {
+            "score_boost": null
+          }
+        },
+        {
+          "abbrev": "TBD",
+          "category": "other",
+          "category_group": "sport",
+          "contrast_color": "",
+          "display_type": "performer_vs_performer",
+          "id": "5a99e2126311820014498a01",
+          "hero_image_url": "https://images.gametime.co/othertbd/hero@4x.jpg",
+          "medium_name": "TBD",
+          "name": "TBD",
+          "primary_color": "d6d0d0FF",
+          "short_name": "TBD",
+          "slug": "othertbd",
+          "meta": {
+            "score_boost": null
+          }
+        }
+      ],
+      "venue": {
+        "city": "Calgary",
+        "id": "545afc643bf3763fb9000001",
+        "location": {
+          "lat": 51.0382,
+          "lon": -114.051
+        },
+        "name": "Scotiabank Saddledome",
+        "show_currency": true,
+        "slug": "scotiabank_saddledome",
+        "state": "AB",
+        "timezone": "America/Denver",
+        "metro": "calgary",
+        "image_url": "https://maps.gametime.co/v2/scotiabank_saddledome/nhl_clg/nhl_clg-8.png",
+        "meta": {
+          "score_boost": null
+        }
+      },
+      "meta": {
+        "search_score": 7.108614,
+        "score_boost": null
+      }
+    },
+    {
+      "event": {
+        "banner": {
+          "headline": "",
+          "subtitle": "",
+          "emoji": ""
+        },
+        "category": "nhl",
+        "center_court": {
+          "x": 147,
+          "y": 104,
+          "width": 26,
+          "height": 34
+        },
+        "datetime_local": "2023-05-23T03:30:00",
+        "datetime_utc": "2023-05-23T09:30:00",
+        "id": "63e41d207bb8a40001a8075c",
+        "map_url": "https://maps.gametime.co/v2/scotiabank_saddledome/hockey/hockey-8.png",
+        "min_price": {
+          "total": 0,
+          "prefee": 0
+        },
+        "name": "Western Conference Finals: TBD at Calgary Flames - Home Game 3",
+        "performers": [
+          {
+            "id": "545d4af53bf3762bdb00000e",
+            "primary": true
+          },
+          {
+            "id": "5a99e2126311820014498a01",
+            "primary": false
+          }
+        ],
+        "sales_cut_off": "2023-05-23T10:15:00Z",
+        "section_map_id": "5d8ede1cd7af45a10c65b680",
+        "tbd": true,
+        "time_tbd": true,
+        "date_tbd": true,
+        "venue_id": "545afc643bf3763fb9000001",
+        "venue_config": "hockey",
+        "related_events": {}
+      },
+      "performers": [
+        {
+          "abbrev": "CLG",
+          "category": "nhl",
+          "category_group": "sport",
+          "contrast_color": "FFC758FF",
+          "display_type": "performer_vs_performer",
+          "id": "545d4af53bf3762bdb00000e",
+          "hero_image_url": "https://images.gametime.co/nhlclg/hero@4x.jpg",
+          "medium_name": "CLG Flames",
+          "name": "Calgary Flames",
+          "primary_color": "E03A3EFF",
+          "short_name": "Flames",
+          "slug": "nhlclg",
+          "meta": {
+            "score_boost": null
+          }
+        },
+        {
+          "abbrev": "TBD",
+          "category": "other",
+          "category_group": "sport",
+          "contrast_color": "",
+          "display_type": "performer_vs_performer",
+          "id": "5a99e2126311820014498a01",
+          "hero_image_url": "https://images.gametime.co/othertbd/hero@4x.jpg",
+          "medium_name": "TBD",
+          "name": "TBD",
+          "primary_color": "d6d0d0FF",
+          "short_name": "TBD",
+          "slug": "othertbd",
+          "meta": {
+            "score_boost": null
+          }
+        }
+      ],
+      "venue": {
+        "city": "Calgary",
+        "id": "545afc643bf3763fb9000001",
+        "location": {
+          "lat": 51.0382,
+          "lon": -114.051
+        },
+        "name": "Scotiabank Saddledome",
+        "show_currency": true,
+        "slug": "scotiabank_saddledome",
+        "state": "AB",
+        "timezone": "America/Denver",
+        "metro": "calgary",
+        "image_url": "https://maps.gametime.co/v2/scotiabank_saddledome/nhl_clg/nhl_clg-8.png",
+        "meta": {
+          "score_boost": null
+        }
+      },
+      "meta": {
+        "search_score": 7.108614,
+        "score_boost": null
+      }
+    }
+  ],
+  "more": true,
+  "page": 1,
+  "per_page": 15
+}

@@ -16,7 +16,20 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+
+    implementation("javax.mail:mail:1.4.7")
+
+    implementation("io.github.cdimascio:dotenv-java:2.2.0")
+
+    implementation("com.google.api-client:google-api-client:1.32.1")
+    implementation("com.google.oauth-client:google-oauth-client-jetty:1.32.1")
+
+    implementation("com.google.apis:google-api-services-gmail:v1-rev110-1.25.0")
+
+
+
 
     testImplementation(kotlin("test"))
 }

@@ -1,10 +1,21 @@
 package model.gametime
 
+import com.google.gson.annotations.SerializedName
+import java.math.BigDecimal
+
 data class Listing(
     val price: Price,
-    val row: String
+    val spot: Spot,
 )
 
+fun Listing.isNotPressLevel() = !spot.section.startsWith("PL")
+
 data class Price(
-    val total: Long
+    val total: BigDecimal
+)
+
+data class Spot(
+    val row: Long,
+    val section: String,
+    @SerializedName("view_url") val viewUrl: String
 )
