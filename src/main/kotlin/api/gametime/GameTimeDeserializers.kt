@@ -9,7 +9,6 @@ import com.google.gson.JsonObject
 import model.gametime.Event
 import model.gametime.Listing
 import model.gametime.Price
-import model.gametime.isNotPressLevel
 import java.lang.reflect.Type
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -53,7 +52,6 @@ class ListingsDeserializer : JsonDeserializer<ArrayList<Listing>> {
                 val moneyFormat = Price(listing.price.total.movePointLeft(2))
                 listing.copy(price = moneyFormat)
             }
-            .filter { it.isNotPressLevel() }
 
         return ArrayList(listings)
     }

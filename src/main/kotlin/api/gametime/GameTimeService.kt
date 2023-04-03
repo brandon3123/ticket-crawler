@@ -2,6 +2,7 @@ package api.gametime
 
 import model.gametime.Event
 import model.gametime.Listing
+import model.gametime.isNotPressLevel
 
 class GameTimeService(
     private val api: GameTimeApi
@@ -13,6 +14,8 @@ class GameTimeService(
 
     suspend fun seats(eventId: String): List<Listing> {
         return api.getListings(eventId)
+            .filter { it.isNotPressLevel() }
+            .sortedBy { it.price.total }
     }
 }
 

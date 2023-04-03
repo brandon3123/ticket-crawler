@@ -2,43 +2,29 @@ package crawler
 
 import api.gametime.GameTimeService
 import api.gametime.under
-import emailer.Emailer
+import emailer.EmailService
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import java.time.format.DateTimeFormatter
 
 class TickerCrawler(
     private val gameTimeService: GameTimeService,
-    private val emailer: Emailer
+    private val emailService: EmailService
 ) {
 
-    private val fifteenMinutes = 10L * 1000L
-    private val niceDatePattern = DateTimeFormatter.ofPattern("MMMM dd, yyyy 'at' h:mm a")
+    private val fifteenMinutes = 15L * 60L * 1000L
+
     fun findFlamesTickets() {
         runBlocking {
             launch {
                 repeat(Int.MAX_VALUE) {
                     val games = gameTimeService.calgaryFlamesGames()
 
-                    val cheapSeats = games.flatMap { game ->
-                        val seats = gameTimeService.seats(game.id).under(40)
-
-                        if (seats.isNotEmpty()) {
-//                            println("Found seats under $20 for game ${game.name} at ${niceDatePattern.format(game.time)}")
-
-                            seats
-
-//                            seats.forEach { seat ->
-//                                println("Found seat in row ${seat.spot.row}, section ${seat.spot.section}")
-//                            }
-                        } else {
-                            emptyList()
-                        }
-
+                    val gamesWithSeats = games.associateWith { game ->
+                        gameTimeService.seats(game.id).under(35)
                     }
 
-                    emailer.sendEmailNotification(cheapSeats)
+                    emailService.sendEmailNotification(gamesWithSeats)
 
                     delay(fifteenMinutes)
                 }
