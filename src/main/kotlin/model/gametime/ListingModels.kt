@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 import java.math.BigDecimal
 
 data class Listing(
+    val id: String,
     val price: Price,
     val spot: Spot,
 )

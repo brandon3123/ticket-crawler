@@ -20,9 +20,12 @@ class TickerCrawler(
                 repeat(Int.MAX_VALUE) {
                     val games = gameTimeService.calgaryFlamesGames()
 
-                    val gamesWithSeats = games.associateWith { game ->
-                        gameTimeService.seats(game.id).under(35)
-                    }
+                    val gamesWithSeats =
+                        games
+                            .associateWith { game ->
+                                gameTimeService.seats(game.id).under(40)
+                            }
+                            .filter { (_, seats) -> seats.isNotEmpty() }
 
                     emailService.sendEmailNotification(gamesWithSeats)
 

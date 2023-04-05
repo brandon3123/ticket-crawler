@@ -3,6 +3,7 @@ package emailer
 import io.github.cdimascio.dotenv.Dotenv
 import model.gametime.Event
 import model.gametime.Listing
+import util.asHtmlTable
 import java.time.format.DateTimeFormatter
 import java.util.*
 import javax.mail.Authenticator
@@ -38,12 +39,16 @@ class EmailService {
 
             val messageBuilder = StringBuilder()
 
+            messageBuilder.append("<html><body>")
+
             gamesWithSeats.forEach { (game, seats) ->
                 val emailBody = emailBodyFor(game, seats)
                 messageBuilder.append(emailBody).append("\n")
             }
 
-            message.setText(messageBuilder.toString())
+            messageBuilder.append("</body></html>")
+
+            message.setContent(messageBuilder.toString(), "text/html")
 
             Transport.send(message)
 
@@ -58,15 +63,11 @@ class EmailService {
 
         val gameTimeString = niceDateFormat.format(game.time).toString()
 
-        builder.append("Found Seats for ${game.name} at $gameTimeString\n")
+        builder.append("<div><h3>Seats for ${game.name} at $gameTimeString</h3></div>")
 
-        seats.forEach {
-            builder.append(
-                "Price: $${it.price.total}, Section: ${it.spot.section}, Row: ${it.spot.row}\n"
-            )
-        }
-
-        builder.append("\n")
+        builder.append(
+            seats.asHtmlTable(game)
+        )
 
         return builder.toString()
     }
