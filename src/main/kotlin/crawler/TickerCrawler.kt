@@ -20,21 +20,22 @@ class TickerCrawler(
                 repeat(Int.MAX_VALUE) {
                     println("Looking for tickets....")
 
+                    // Fetch upcoming flames games, no press level
                     val games = gameTimeService.calgaryFlamesGames()
 
-                    val gamesWithSeats =
-                        games
-                            .associateWith { game ->
-                                gameTimeService.seats(game.id).under(28)
-                            }
-                            .filter { (_, seats) -> seats.isNotEmpty() }
+                    // Get the seats for each game, under x amount
+                    val gamesWithSeats = games
+                        .associateWith { gameTimeService.seats(it.id).under(35) }
+                        .filter { (_, seats) -> seats.isNotEmpty() }
 
+                    // Email them to me if found
                     if (gamesWithSeats.isNotEmpty()) {
                         emailService.sendEmailNotification(gamesWithSeats)
                     } else {
                         println("No tickets found.....")
                     }
 
+                    // Runs this code every 15 minutes
                     delay(fifteenMinutes)
                 }
 
