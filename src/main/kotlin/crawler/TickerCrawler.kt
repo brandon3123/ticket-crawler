@@ -18,16 +18,22 @@ class TickerCrawler(
         runBlocking {
             launch {
                 repeat(Int.MAX_VALUE) {
+                    println("Looking for tickets....")
+
                     val games = gameTimeService.calgaryFlamesGames()
 
                     val gamesWithSeats =
                         games
                             .associateWith { game ->
-                                gameTimeService.seats(game.id).under(40)
+                                gameTimeService.seats(game.id).under(28)
                             }
                             .filter { (_, seats) -> seats.isNotEmpty() }
 
-                    emailService.sendEmailNotification(gamesWithSeats)
+                    if (gamesWithSeats.isNotEmpty()) {
+                        emailService.sendEmailNotification(gamesWithSeats)
+                    } else {
+                        println("No tickets found.....")
+                    }
 
                     delay(fifteenMinutes)
                 }
