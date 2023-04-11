@@ -19,16 +19,16 @@ class GameTimeService(
             .sortedBy { it.price.total }
     }
 
-    suspend fun seatsForGames(games: List<Event>): GamesWithSeats {
+    suspend fun seatsForGames(games: List<Event>, maxPrice: Int): GamesWithSeats {
         val data = games
-            .associateWith { seats(it.id).under(35) }
+            .associateWith { seats(it.id).under(maxPrice) }
             .filter { (_, seats) -> seats.isNotEmpty() }
 
         return GamesWithSeats(data)
     }
 }
 
-fun List<Listing>.under(price: Long) =
+fun List<Listing>.under(price: Int) =
     filter {
         it.price.total.longValueExact() <= price
     }

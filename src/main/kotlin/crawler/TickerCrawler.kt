@@ -1,7 +1,6 @@
 package crawler
 
 import api.gametime.GameTimeService
-import api.gametime.under
 import emailer.EmailService
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -14,6 +13,7 @@ class TickerCrawler(
 ) {
 
     private val fifteenMinutes = 15L * 60L * 1000L
+    private val maxPrice = 35
 
     fun findFlamesTickets() {
         runBlocking {
@@ -27,7 +27,7 @@ class TickerCrawler(
                     val games = gameTimeService.calgaryFlamesGames()
 
                     // Get the seats for each game, under x amount
-                    val gamesWithSeats = gameTimeService.seatsForGames(games)
+                    val gamesWithSeats = gameTimeService.seatsForGames(games, maxPrice)
 
                     // Email them to me if found
                     if (gamesWithSeats.data.isNotEmpty()) {
