@@ -1,6 +1,7 @@
 package api.gametime
 
 import model.gametime.Event
+import model.gametime.GamesWithSeats
 import model.gametime.Listing
 import model.gametime.isNotPressLevel
 
@@ -16,6 +17,14 @@ class GameTimeService(
         return api.getListings(eventId)
             .filter { it.isNotPressLevel() }
             .sortedBy { it.price.total }
+    }
+
+    suspend fun seatsForGames(games: List<Event>): GamesWithSeats {
+        val data = games
+            .associateWith { seats(it.id).under(35) }
+            .filter { (_, seats) -> seats.isNotEmpty() }
+
+        return GamesWithSeats(data)
     }
 }
 

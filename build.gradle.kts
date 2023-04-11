@@ -28,9 +28,6 @@ dependencies {
 
     implementation("com.google.apis:google-api-services-gmail:v1-rev110-1.25.0")
 
-
-
-
     testImplementation(kotlin("test"))
 }
 

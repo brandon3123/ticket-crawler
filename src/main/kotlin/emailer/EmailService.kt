@@ -1,10 +1,8 @@
 package emailer
 
 import io.github.cdimascio.dotenv.Dotenv
-import model.gametime.Event
-import model.gametime.Listing
-import util.asHtmlTable
-import java.time.format.DateTimeFormatter
+import model.gametime.GamesWithSeats
+import util.asHtmlEmail
 import java.util.*
 import javax.mail.Authenticator
 import javax.mail.Message
@@ -21,15 +19,11 @@ class EmailService {
     private val env = Dotenv.configure().load()
     private val email = env["EMAIL"]
     private val password = env["PASSWORD"]
-    private val niceDateFormat = DateTimeFormatter.ofPattern("MMMM dd, yyyy 'at' h:mm a")
 
-    fun sendEmailNotification(gamesWithSeats: Map<Event, List<Listing>>) {
 
-        val session = Session.getInstance(properties, object : Authenticator() {
-            override fun getPasswordAuthentication(): PasswordAuthentication {
-                return PasswordAuthentication(email, password)
-            }
-        })
+    fun sendEmailNotification(gamesWithSeats: GamesWithSeats) {
+        // Create an email session
+        val session = getSession()
 
         try {
             val message = MimeMessage(session)
@@ -37,39 +31,27 @@ class EmailService {
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email))
             message.subject = "Flames Games Tickets - Ticket Crawler"
 
-            val messageBuilder = StringBuilder()
+            // Build the email, simple html table for readability
+            val emailBody = gamesWithSeats.asHtmlEmail()
 
-            messageBuilder.append("<html><body>")
+            message.setContent(emailBody, "text/html")
 
-            gamesWithSeats.forEach { (game, seats) ->
-                val emailBody = emailBodyFor(game, seats)
-                messageBuilder.append(emailBody).append("\n")
-            }
-
-            messageBuilder.append("</body></html>")
-
-            message.setContent(messageBuilder.toString(), "text/html")
-
+            // Send the email
             Transport.send(message)
 
-            println("Email notification sent successfully.")
+            println("*** Email notification sent successfully ***")
         } catch (e: MessagingException) {
             e.printStackTrace()
         }
     }
 
-    private fun emailBodyFor(game: Event, seats: List<Listing>): String {
-        val builder = StringBuilder()
-
-        val gameTimeString = niceDateFormat.format(game.time).toString()
-
-        builder.append("<div><h3>Seats for ${game.name} at $gameTimeString</h3></div>")
-
-        builder.append(
-            seats.asHtmlTable(game)
-        )
-
-        return builder.toString()
+    private fun getSession(): Session? {
+        val session = Session.getInstance(properties, object : Authenticator() {
+            override fun getPasswordAuthentication(): PasswordAuthentication {
+                return PasswordAuthentication(email, password)
+            }
+        })
+        return session
     }
 
     private fun getEmailProps(): Properties {

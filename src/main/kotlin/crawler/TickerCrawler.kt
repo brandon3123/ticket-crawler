@@ -6,6 +6,7 @@ import emailer.EmailService
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.time.LocalTime
 
 class TickerCrawler(
     private val gameTimeService: GameTimeService,
@@ -17,22 +18,22 @@ class TickerCrawler(
     fun findFlamesTickets() {
         runBlocking {
             launch {
-                repeat(Int.MAX_VALUE) {
-                    println("Looking for tickets....")
+                while(true) {
+                    val now = LocalTime.now()
+
+                    println("$now: *** Looking for tickets ***")
 
                     // Fetch upcoming flames games, no press level
                     val games = gameTimeService.calgaryFlamesGames()
 
                     // Get the seats for each game, under x amount
-                    val gamesWithSeats = games
-                        .associateWith { gameTimeService.seats(it.id).under(35) }
-                        .filter { (_, seats) -> seats.isNotEmpty() }
+                    val gamesWithSeats = gameTimeService.seatsForGames(games)
 
                     // Email them to me if found
-                    if (gamesWithSeats.isNotEmpty()) {
+                    if (gamesWithSeats.data.isNotEmpty()) {
                         emailService.sendEmailNotification(gamesWithSeats)
                     } else {
-                        println("No tickets found.....")
+                        println("$now: *** No tickets found ***")
                     }
 
                     // Runs this code every 15 minutes
