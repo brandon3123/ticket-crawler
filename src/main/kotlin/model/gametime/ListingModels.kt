@@ -7,6 +7,7 @@ data class Listing(
     val id: String,
     val price: Price,
     val spot: Spot,
+    val numOfSeats: Int
 )
 
 fun Listing.isNotPressLevel() = !spot.section.startsWith("PL")

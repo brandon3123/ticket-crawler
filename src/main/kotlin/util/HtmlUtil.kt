@@ -16,6 +16,7 @@ fun List<Listing>.asHtmlTable(game: Event) =
             <th style="$BORDER_STYLE">Price</th>
             <th style="$BORDER_STYLE">Section</th>
             <th style="$BORDER_STYLE">Row</th>
+            <th style="$BORDER_STYLE">Seats</th>
             <th style="$BORDER_STYLE">Purchase</th>
             </tr>
             ${joinToString("\n") { it.asRow(game) }}
@@ -29,6 +30,7 @@ fun Listing.asRow(game: Event): String {
             <td style="$BORDER_STYLE">$${price.total}</td>
             <td style="$BORDER_STYLE">${spot.section}</td>
             <td style="$BORDER_STYLE">${spot.row}</td>
+            <td style="$BORDER_STYLE">$numOfSeats</td>
             <td style="$BORDER_STYLE">$buyLink</td>
         </tr>"""
 }

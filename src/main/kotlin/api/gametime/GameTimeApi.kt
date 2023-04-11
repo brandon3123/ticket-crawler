@@ -12,7 +12,7 @@ import retrofit2.http.Path
 
 interface GameTimeApi {
 
-    @GET("/v2/listings/{eventId}")
+    @GET("/v2/listings/{eventId}?all_in_pricing=true")
     suspend fun getListings(@Path("eventId") eventId: String): ArrayList<Listing>
 
     @GET("/v1/events$FLAMES_GAMES_PARAMS")
