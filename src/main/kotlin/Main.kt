@@ -3,6 +3,9 @@ import api.gametime.GameTimeApi
 import api.gametime.GameTimeService
 import crawler.TickerCrawler
 import emailer.EmailService
+import kotlin.concurrent.fixedRateTimer
+
+private const val FIVE_MINUTES = 5L * 60L * 1000L
 
 fun main() {
     val api = GameTimeApi.getRetrofit(BASE_URL)
@@ -13,5 +16,8 @@ fun main() {
 
     val crawler = TickerCrawler(gameTimeService, emailService)
 
-    crawler.findFlamesTickets()
+    // Look for tickets every 5 minutes
+    fixedRateTimer("ticket-check", period = FIVE_MINUTES) {
+        crawler.findTickets()
+    }
 }

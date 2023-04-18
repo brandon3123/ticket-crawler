@@ -18,6 +18,9 @@ interface GameTimeApi {
     @GET("/v1/events$FLAMES_GAMES_PARAMS")
     suspend fun calgaryFlamesGames(): ArrayList<Event>
 
+    @GET("/v1/events$WRANGLERS_GAMES_PARAMS")
+    suspend fun calgaryWranglersGames(): ArrayList<Event>
+
     companion object {
         private fun getClient(): OkHttpClient {
             return OkHttpClient.Builder().build()

@@ -3,6 +3,7 @@ package emailer
 import io.github.cdimascio.dotenv.Dotenv
 import model.gametime.GamesWithSeats
 import util.asHtmlEmail
+import util.log
 import java.util.*
 import javax.mail.Authenticator
 import javax.mail.Message
@@ -21,7 +22,7 @@ class EmailService {
     private val password = env["PASSWORD"]
 
 
-    fun sendEmailNotification(gamesWithSeats: GamesWithSeats) {
+    fun sendEmailNotification(subject: String, gamesWithSeats: GamesWithSeats) {
         // Create an email session
         val session = getSession()
 
@@ -29,7 +30,7 @@ class EmailService {
             val message = MimeMessage(session)
             message.setFrom(InternetAddress(email))
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email))
-            message.subject = "Flames Games Tickets - Ticket Crawler"
+            message.subject = subject
 
             // Build the email, simple html table for readability
             val emailBody = gamesWithSeats.asHtmlEmail()
@@ -39,7 +40,7 @@ class EmailService {
             // Send the email
             Transport.send(message)
 
-            println("*** Email notification sent successfully ***")
+            log("Email notification sent successfully")
         } catch (e: MessagingException) {
             e.printStackTrace()
         }

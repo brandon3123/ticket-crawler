@@ -9,6 +9,10 @@ class GameTimeService(
     private val api: GameTimeApi
 ) {
 
+    suspend fun calgaryWranglersGames(): List<Event> {
+        return api.calgaryWranglersGames()
+    }
+
     suspend fun calgaryFlamesGames(): List<Event> {
         return api.calgaryFlamesGames()
     }
