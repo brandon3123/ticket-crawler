@@ -34,5 +34,5 @@ class GameTimeService(
 
 fun List<Listing>.under(price: Int) =
     filter {
-        it.price.total.longValueExact() <= price
+        it.price.total.toLong() <= price
     }

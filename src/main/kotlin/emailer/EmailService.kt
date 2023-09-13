@@ -1,6 +1,6 @@
 package emailer
 
-import io.github.cdimascio.dotenv.Dotenv
+import Config
 import model.gametime.GamesWithSeats
 import util.asHtmlEmail
 import util.log
@@ -17,10 +17,6 @@ import javax.mail.internet.MimeMessage
 class EmailService {
 
     private val properties = getEmailProps()
-    private val env = Dotenv.configure().load()
-    private val email = env["EMAIL"]
-    private val password = env["PASSWORD"]
-
 
     fun sendEmailNotification(subject: String, gamesWithSeats: GamesWithSeats) {
         // Create an email session
@@ -28,8 +24,8 @@ class EmailService {
 
         try {
             val message = MimeMessage(session)
-            message.setFrom(InternetAddress(email))
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email))
+            message.setFrom(InternetAddress(Config.Email.EMAIL))
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(Config.Email.EMAIL))
             message.subject = subject
 
             // Build the email, simple html table for readability
@@ -49,7 +45,7 @@ class EmailService {
     private fun getSession(): Session? {
         val session = Session.getInstance(properties, object : Authenticator() {
             override fun getPasswordAuthentication(): PasswordAuthentication {
-                return PasswordAuthentication(email, password)
+                return PasswordAuthentication(Config.Email.EMAIL, Config.Email.PASSWORD)
             }
         })
         return session

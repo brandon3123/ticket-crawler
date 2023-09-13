@@ -1,5 +1,6 @@
 package api.gametime
 
+import ExchangeRates
 import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonDeserializationContext
@@ -10,6 +11,7 @@ import model.gametime.Event
 import model.gametime.Listing
 import model.gametime.Price
 import java.lang.reflect.Type
+import java.math.RoundingMode
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -42,6 +44,8 @@ class EventsDeserializer : JsonDeserializer<ArrayList<Event>> {
 }
 
 class ListingsDeserializer : JsonDeserializer<ArrayList<Listing>> {
+    private val cadExchangeRate = ExchangeRates.cad()
+
     override fun deserialize(
         json: JsonElement?,
         typeOfT: Type?,
@@ -51,18 +55,27 @@ class ListingsDeserializer : JsonDeserializer<ArrayList<Listing>> {
 
         val listings = listingsResponse
             .entrySet()
-            .map { (_, listingJson ) ->
+            .map { (_, listingJson) ->
                 // Get the listing data
                 val listing = Gson().fromJson(listingJson, Listing::class.java)
 
-                // Update the price into something with 2 decimals
-                val moneyFormat = Price(listing.price.total.movePointLeft(2))
+                // get USD price, by 2 decimal points
+                val usdPrice = listing.price.total.movePointLeft(2)
+
+                // Convert to CAD, if the exchange rate isn't present. Just use USD
+                val total =
+                    cadExchangeRate?.let { cadExchangeRate ->
+                        val cadPrice = usdPrice * cadExchangeRate.toBigDecimal()
+                        cadPrice.setScale(2, RoundingMode.HALF_UP)
+                    } ?: usdPrice
+
+                val price = Price(total)
 
                 // Get the number of seats, per listing
-                val seats = listingJson.asJsonObject.get("seats").asJsonArray
+                val seats = listingJson.asJsonObject["seats"].asJsonArray
 
                 listing.copy(
-                    price = moneyFormat,
+                    price = price,
                     numOfSeats = seats.size()
                 )
             }
