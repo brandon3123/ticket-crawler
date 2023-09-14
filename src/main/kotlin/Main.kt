@@ -7,9 +7,18 @@ import api.gametime.GameTimeService
 import crawler.TickerCrawler
 import emailer.EmailService
 import io.github.cdimascio.dotenv.Dotenv
+import io.ktor.serialization.kotlinx.json.*
+import io.ktor.server.application.*
+import io.ktor.server.engine.*
+import io.ktor.server.netty.*
+import io.ktor.server.plugins.contentnegotiation.*
+import io.ktor.server.routing.*
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.modules.SerializersModule
+import ktor.serializers.LocalDateTimeConverter
 import model.exchangerate.ExchangeRate
-import kotlin.concurrent.fixedRateTimer
+import routes.games
+import java.time.LocalDateTime
 
 private const val FIVE_MINUTES = 5L * 60L * 1000L
 
@@ -22,10 +31,29 @@ fun main() {
 
     val crawler = TickerCrawler(gameTimeService, emailService)
 
-    // Look for tickets every 5 minutes
-    fixedRateTimer("ticket-check", period = FIVE_MINUTES) {
-        crawler.findTickets()
-    }
+    embeddedServer(Netty, port = 8080) {
+        install(ContentNegotiation) {
+            json(
+                json = kotlinx.serialization.json.Json {
+                    serializersModule = SerializersModule {
+                        contextual(LocalDateTime::class, LocalDateTimeConverter)
+                    }
+                }
+            )
+        }
+
+        routing {
+            games(gameTimeService)
+        }
+    }.start()
+
+//    // Look for tickets every 5 minutes
+//    fixedRateTimer("ticket-check", period = FIVE_MINUTES) {
+//        crawler.findTickets()
+//    }
+
+
+
 }
 
 

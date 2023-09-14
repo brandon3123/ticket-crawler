@@ -18,7 +18,7 @@ class TickerCrawler(
     fun findTickets() {
         runBlocking {
             findFlamesTickets()
-            findWranglersTickets()
+//            findWranglersTickets()
         }
     }
 

@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.7.20"
     application
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.8.0"
 }
 
 group = "org.example"
@@ -27,6 +28,15 @@ dependencies {
     implementation("com.google.oauth-client:google-oauth-client-jetty:1.32.1")
 
     implementation("com.google.apis:google-api-services-gmail:v1-rev110-1.25.0")
+
+    // KTOR
+    implementation("io.ktor:ktor-server-core:2.3.4")
+    implementation("io.ktor:ktor-server-netty:2.3.4")
+    implementation("io.ktor:ktor-server-content-negotiation:2.3.4")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.4")
+//    implementation("io.ktor:ktor-jackson:1.6.8")
+
+//    implementation("ch.qos.logback:logback-classic:$logback_version")
 
     testImplementation(kotlin("test"))
 }
