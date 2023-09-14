@@ -44,6 +44,7 @@ fun main() {
 
         routing {
             games(gameTimeService)
+            // Add your seats route here
         }
     }.start()
 

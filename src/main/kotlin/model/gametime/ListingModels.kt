@@ -3,6 +3,9 @@ package model.gametime
 import com.google.gson.annotations.SerializedName
 import java.math.BigDecimal
 
+// Look at the Event class for an example of what to do
+// -add @Serializable
+// - Add @Contextual for each complication object property (price/spot). I'm not 100% sure what you'll need here.....
 data class Listing(
     val id: String,
     val price: Price,
