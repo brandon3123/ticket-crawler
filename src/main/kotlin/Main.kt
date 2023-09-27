@@ -44,7 +44,9 @@ fun main() {
 
         routing {
             games(gameTimeService)
-            // Add your seats route here
+            // Comment for Bronson step 2
+            // Add your seats route here, start the app. You'll probably get an error about json or something
+            // when you start the app and hit the GET endpoint. Proceed to step 3, and try again after thats completed.
         }
     }.start()
 

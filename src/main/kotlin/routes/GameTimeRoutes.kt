@@ -14,5 +14,6 @@ fun Route.games(
     }
 }
 
+// comment for Bronson step 1
 // Make a seats route here
-// copy paste above, get some games, and call the seats functions from GameTimeService for an event id.
+// copy paste above, get some games, and call the seats functions from GameTimeService for an event/game id.
