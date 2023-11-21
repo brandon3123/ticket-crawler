@@ -4,6 +4,7 @@ import model.gametime.Event
 import model.gametime.GamesWithSeats
 import model.gametime.Listing
 import model.gametime.isNotPressLevel
+import java.time.LocalDate
 
 class GameTimeService(
     private val api: GameTimeApi
@@ -13,8 +14,12 @@ class GameTimeService(
         return api.calgaryWranglersGames()
     }
 
-    suspend fun calgaryFlamesGames(): List<Event> {
-        return api.calgaryFlamesGames()
+    suspend fun calgaryFlamesGames(gameDays: List<LocalDate>?): List<Event> {
+        return if (gameDays != null) {
+            api.calgaryFlamesGames().forDates(gameDays)
+        } else {
+            api.calgaryFlamesGames()
+        }
     }
 
     suspend fun seats(eventId: String): List<Listing> {
@@ -35,4 +40,9 @@ class GameTimeService(
 fun List<Listing>.under(price: Int) =
     filter {
         it.price.total.toLong() <= price
+    }
+
+fun List<Event>.forDates(gameDays: List<LocalDate>) =
+    filter {
+        gameDays.contains(it.time.toLocalDate())
     }

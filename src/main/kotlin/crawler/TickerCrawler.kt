@@ -1,5 +1,6 @@
 package crawler
 
+import Config
 import api.gametime.GameTimeService
 import emailer.EmailService
 import kotlinx.coroutines.runBlocking
@@ -11,7 +12,6 @@ class TickerCrawler(
     private val emailService: EmailService
 ) {
 
-    private val maxPrice = 30
     private val flamesEmailSubject = "Flames Games Tickets - Ticket Crawler"
     private val wranglersEmailSubject = "Wrangles Games Tickets - Ticket Crawler"
 
@@ -26,10 +26,10 @@ class TickerCrawler(
         log("Looking for Calgary Flames tickets")
 
         // Fetch upcoming flames games, no press level
-        val games = gameTimeService.calgaryFlamesGames()
+        val games = gameTimeService.calgaryFlamesGames(Config.TicketFilters.GAME_DAYS)
 
         // Get the seats for each game, under x amount
-        val gamesWithSeats = gameTimeService.seatsForGames(games, maxPrice)
+        val gamesWithSeats = gameTimeService.seatsForGames(games, Config.TicketFilters.MAX_PRICE)
 
         // Email them to me if found
         emailGamesWithSeats(
@@ -45,7 +45,7 @@ class TickerCrawler(
         val games = gameTimeService.calgaryWranglersGames()
 
         // Get the seats for each game, under x amount
-        val gamesWithSeats = gameTimeService.seatsForGames(games, maxPrice)
+        val gamesWithSeats = gameTimeService.seatsForGames(games, Config.TicketFilters.MAX_PRICE)
 
         // Email them to me if found
         emailGamesWithSeats(

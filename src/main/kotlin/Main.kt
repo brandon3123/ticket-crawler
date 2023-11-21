@@ -9,6 +9,8 @@ import emailer.EmailService
 import io.github.cdimascio.dotenv.Dotenv
 import kotlinx.coroutines.runBlocking
 import model.exchangerate.ExchangeRate
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import kotlin.concurrent.fixedRateTimer
 
 private const val FIVE_MINUTES = 5L * 60L * 1000L
@@ -32,6 +34,20 @@ fun main() {
 
 object Config {
     private val env = Dotenv.configure().load()
+
+    object TicketFilters {
+        val MAX_PRICE: Int = env["MAX_PRICE"].toInt()
+        val GAME_DAYS: List<LocalDate>? = getGameDays()
+
+        private fun getGameDays(): List<LocalDate>? {
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+
+            return env["GAME_DAYS"]
+                ?.split(",")
+                ?.map { LocalDate.parse(it, formatter) }
+        }
+    }
+
 
     object Email {
         val EMAIL: String = env["EMAIL"]
