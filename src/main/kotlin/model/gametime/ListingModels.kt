@@ -10,8 +10,6 @@ data class Listing(
     val numOfSeats: Int
 )
 
-fun Listing.isNotPressLevel() = !spot.section.startsWith("PL")
-
 data class Price(
     val total: BigDecimal
 )

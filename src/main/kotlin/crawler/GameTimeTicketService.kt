@@ -11,10 +11,10 @@ class GameTimeTicketService(
 
     override suspend fun calgaryFlamesTickets(gameFilters: GameFilters): GamesWithSeats {
         // Fetch upcoming flames games, no press level
-        val games = gameTimeService.calgaryFlamesGames(gameFilters.days)
+        val games = gameTimeService.calgaryFlamesGames(gameFilters)
 
         // Get the seats for each game, under x amount
-        return gameTimeService.seatsForGames(games, gameFilters.maxPrice)
+        return gameTimeService.seatsForGames(games, gameFilters)
     }
 
     override suspend fun calgaryWranglersTickets(gameFilters: GameFilters): GamesWithSeats {
@@ -22,7 +22,7 @@ class GameTimeTicketService(
         val games = gameTimeService.calgaryWranglersGames()
 
         // Get the seats for each game, under x amount
-        return gameTimeService.seatsForGames(games, gameFilters.maxPrice)
+        return gameTimeService.seatsForGames(games, gameFilters)
     }
 
     fun toEmailBody(gamesWithSeats: GamesWithSeats): String {
