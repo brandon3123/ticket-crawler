@@ -3,11 +3,12 @@ package crawler
 import config.GameFilters
 import emailer.EmailService
 import kotlinx.coroutines.runBlocking
-import service.gametime.GameTimeTicketService
+import model.TicketResults
+import model.TicketWorker
 import util.log
 
-class TickerCrawler(
-    private val gameTimeTicketService: GameTimeTicketService,
+class TickerCrawler<T : TicketResults>(
+    private val workers: List<TicketWorker<T>>,
     private val gameFilters: GameFilters,
     private val emailService: EmailService
 ) {
@@ -27,15 +28,13 @@ class TickerCrawler(
         }
     }
 
-    suspend fun findFlamesTickets() {
+    private suspend fun findFlamesTickets() {
         log("Looking for Calgary Flames tickets")
 
-        val gameTimeTickets = gameTimeTicketService.calgaryFlamesTickets(gameFilters)
-        val gameTimeTicketsAsEmail = gameTimeTicketService.toEmailBody(gameTimeTickets)
-
-        val emailParts = listOf(
-            gameTimeTicketsAsEmail
-        )
+        val emailParts = workers.map {
+            val tickets = it.service.calgaryFlamesTickets(gameFilters)
+            it.emailer.toEmailBody(tickets)
+        }
 
         // Email them to me if found
         email(
@@ -44,15 +43,13 @@ class TickerCrawler(
         )
     }
 
-    suspend fun findWranglersTickets() {
+    private suspend fun findWranglersTickets() {
         log("Looking for Calgary Wranglers tickets")
 
-        val gameTimeTickets = gameTimeTicketService.calgaryWranglersTickets(gameFilters)
-        val gameTimeTicketsAsEmail = gameTimeTicketService.toEmailBody(gameTimeTickets)
-
-        val emailParts = listOf(
-            gameTimeTicketsAsEmail
-        )
+        val emailParts = workers.map {
+            val tickets = it.service.calgaryWranglersTickets(gameFilters)
+            it.emailer.toEmailBody(tickets)
+        }
 
         // Email them to me if found
         email(

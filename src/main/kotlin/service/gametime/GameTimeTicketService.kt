@@ -1,13 +1,11 @@
 package service.gametime
 
 import config.GameFilters
-import emailer.gametime.GameTimeEmailBuilder
 import model.gametime.GamesWithSeats
 import service.TicketService
 
 class GameTimeTicketService(
-    private val gameTimeService: GameTimeService,
-    private val gameTimeEmailBuilder: GameTimeEmailBuilder
+    private val gameTimeService: GameTimeService
 ) : TicketService<GamesWithSeats> {
 
     override suspend fun calgaryFlamesTickets(gameFilters: GameFilters): GamesWithSeats {
@@ -24,9 +22,5 @@ class GameTimeTicketService(
 
         // Get the seats for each game, under x amount
         return gameTimeService.seatsForGames(games, gameFilters)
-    }
-
-    fun toEmailBody(gamesWithSeats: GamesWithSeats): String {
-        return gameTimeEmailBuilder.toEmailBody(gamesWithSeats)
     }
 }

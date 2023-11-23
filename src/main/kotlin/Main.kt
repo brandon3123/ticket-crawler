@@ -7,6 +7,8 @@ import emailer.gametime.GameTimeEmailBuilder
 import service.gametime.GameTimeTicketService
 import crawler.TickerCrawler
 import emailer.EmailService
+import model.gametime.GamesWithSeats
+import model.TicketWorker
 import kotlin.concurrent.fixedRateTimer
 
 private const val FIVE_MINUTES = 5L * 60L * 1000L
@@ -19,14 +21,14 @@ fun main() {
     // get the exchange rate for USD -> CAD
     val exchangeRate = ExchangeRate(config.exchangeRate)
 
-    // Spin up ticket services
-    val gameTimeTicketService = gameTimeInit(config.gameTime, exchangeRate)
-
     // Email service
     val emailService = EmailService(config.email)
 
     val crawler = TickerCrawler(
-        gameTimeTicketService = gameTimeTicketService,
+        workers = listOf(
+            gameTimeWorker(config.gameTime, exchangeRate)
+            // Add workers for another ticket site integration
+        ),
         gameFilters = config.gameFilters,
         emailService = emailService
     )
@@ -37,12 +39,13 @@ fun main() {
     }
 }
 
-fun gameTimeInit(config: GameTimeConfig, exchangeRate: ExchangeRate): GameTimeTicketService {
+fun gameTimeWorker(config: GameTimeConfig, exchangeRate: ExchangeRate): TicketWorker<GamesWithSeats> {
     val gameTimeApi = GameTimeApi.getRetrofit(config, exchangeRate)
     val gameTimeService = GameTimeService(gameTimeApi)
     val gameTimeEmailBuilder = GameTimeEmailBuilder(config.buyUrl)
+    val gameTimeTicketService = GameTimeTicketService(gameTimeService)
 
-    return GameTimeTicketService(gameTimeService, gameTimeEmailBuilder)
+    return TicketWorker(gameTimeTicketService, gameTimeEmailBuilder)
 }
 
 

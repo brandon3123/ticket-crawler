@@ -1,5 +1,7 @@
 package emailer
 
-interface EmailBuilder<T> {
+import model.TicketResults
+
+fun interface EmailBuilder<T: TicketResults> {
     fun toEmailBody(data: T): String
 }
