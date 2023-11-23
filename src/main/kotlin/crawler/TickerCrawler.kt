@@ -16,8 +16,13 @@ class TickerCrawler(
 
     fun findTickets() {
         runBlocking {
-            findFlamesTickets()
-            findWranglersTickets()
+            if (gameFilters.teams.flames) {
+                findFlamesTickets()
+            }
+
+            if (gameFilters.teams.wranglers) {
+                findWranglersTickets()
+            }
         }
     }
 

@@ -36,16 +36,22 @@ class GameTimeService(
 }
 
 private fun List<Event>.filterGames(gameFilters: GameFilters): List<Event> {
-    // Add game filters here
-    gameFilters.days?.let { this.forDates(it) }
-    return this
+    var filteredGames = this
+
+    // add filters here
+    gameFilters.days?.let { filteredGames = filteredGames.forDates(it) }
+
+    return filteredGames
 }
 
 private fun List<Listing>.filterSeats(gameFilters: GameFilters): List<Listing> {
-    // Add seat filters here
-    this.isNotPressLevel()
-    this.under(gameFilters.maxPrice)
-    return this
+    var filteredSeats = this
+
+    // add filters here
+    filteredSeats = filteredSeats.isNotPressLevel()
+    filteredSeats = filteredSeats.under(gameFilters.maxPrice)
+
+    return filteredSeats
 }
 
 fun List<Listing>.under(price: Int) =

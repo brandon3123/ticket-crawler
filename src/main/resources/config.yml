@@ -13,6 +13,9 @@ gameFilters:
   maxPrice: 150
   days:
     - "2023-12-27"
+  teams:
+    flames: true
+    wranglers: false
 
 gameTime:
   baseUrl: "https://mobile.gametime.co"
