@@ -1,14 +1,13 @@
 package crawler
 
-import Config
-import api.gametime.GameTimeService
+import config.GameFilters
 import emailer.EmailService
 import kotlinx.coroutines.runBlocking
-import model.gametime.GamesWithSeats
 import util.log
 
 class TickerCrawler(
-    private val gameTimeService: GameTimeService,
+    private val gameTimeTicketService: GameTimeTicketService,
+    private val gameFilters: GameFilters,
     private val emailService: EmailService
 ) {
 
@@ -25,40 +24,42 @@ class TickerCrawler(
     suspend fun findFlamesTickets() {
         log("Looking for Calgary Flames tickets")
 
-        // Fetch upcoming flames games, no press level
-        val games = gameTimeService.calgaryFlamesGames(Config.TicketFilters.GAME_DAYS)
+        val gameTimeTickets = gameTimeTicketService.calgaryFlamesTickets(gameFilters)
+        val gameTimeTicketsAsEmail = gameTimeTicketService.toEmailBody(gameTimeTickets)
 
-        // Get the seats for each game, under x amount
-        val gamesWithSeats = gameTimeService.seatsForGames(games, Config.TicketFilters.MAX_PRICE)
+        val emailParts = listOf(
+            gameTimeTicketsAsEmail
+        )
 
         // Email them to me if found
-        emailGamesWithSeats(
+        email(
             subject = flamesEmailSubject,
-            gamesWithSeats = gamesWithSeats
+            emailParts = emailParts
         )
     }
 
     suspend fun findWranglersTickets() {
         log("Looking for Calgary Wranglers tickets")
 
-        // Fetch upcoming wranglers games, no press level
-        val games = gameTimeService.calgaryWranglersGames()
+        val gameTimeTickets = gameTimeTicketService.calgaryWranglersTickets(gameFilters)
+        val gameTimeTicketsAsEmail = gameTimeTicketService.toEmailBody(gameTimeTickets)
 
-        // Get the seats for each game, under x amount
-        val gamesWithSeats = gameTimeService.seatsForGames(games, Config.TicketFilters.MAX_PRICE)
+        val emailParts = listOf(
+            gameTimeTicketsAsEmail
+        )
 
         // Email them to me if found
-        emailGamesWithSeats(
+        email(
             subject = wranglersEmailSubject,
-            gamesWithSeats = gamesWithSeats
+            emailParts = emailParts
         )
     }
 
-    private fun emailGamesWithSeats(subject: String, gamesWithSeats: GamesWithSeats) {
-        if (gamesWithSeats.data.isNotEmpty()) {
+    private fun email(subject: String, emailParts: List<String>) {
+        if (emailParts.isNotEmpty()) {
             emailService.sendEmailNotification(
                 subject = subject,
-                gamesWithSeats = gamesWithSeats
+                emailParts = emailParts
             )
         } else {
             log("No tickets found")

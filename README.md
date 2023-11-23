@@ -1,7 +1,10 @@
 # Ticket-Crawler
 Small Kotlin app that will allow me to query ticket sites and email me about low prices.
 
-## Currently Supports
+## Supported Integrations
+- GameTime
+
+## Supported Teams
 - Calgary Flames 
 - Calgary Wranglers
 

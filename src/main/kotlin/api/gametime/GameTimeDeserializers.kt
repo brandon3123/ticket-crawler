@@ -1,12 +1,12 @@
 package api.gametime
 
-import ExchangeRates
 import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
+import config.ExchangeRate
 import model.gametime.Event
 import model.gametime.Listing
 import model.gametime.Price
@@ -43,8 +43,10 @@ class EventsDeserializer : JsonDeserializer<ArrayList<Event>> {
     }
 }
 
-class ListingsDeserializer : JsonDeserializer<ArrayList<Listing>> {
-    private val cadExchangeRate = ExchangeRates.cad()
+class ListingsDeserializer(
+    exchangeRate: ExchangeRate
+) : JsonDeserializer<ArrayList<Listing>> {
+    private val cadExchangeRate = exchangeRate.cad()
 
     override fun deserialize(
         json: JsonElement?,

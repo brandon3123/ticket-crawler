@@ -1,0 +1,25 @@
+email:
+  email: "your-gmail-app-password-email"
+  password: "your-gmail-app-password"
+  recipients:
+    - "receiver1@gmail.com"
+    - "receiver2@gmail.com"
+
+exchangeRate:
+  baseUrl: "https://v6.exchangerate-api.com"
+  apiKey: "exchange-rate-api-key"
+
+gameFilters:
+  maxPrice: 150
+  days:
+    - "2023-12-27"
+
+gameTime:
+  baseUrl: "https://mobile.gametime.co"
+  buyUrl: "https://gametime.co/nhl-hockey"
+
+# I tried implementing seat geek integration, but you have to pay for "real" features
+# maybe I'll do that one day.....
+seatGeek:
+  secret: "seat-geek-secret"
+  clientId: "seat-geek-client-id"

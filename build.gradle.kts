@@ -21,12 +21,14 @@ dependencies {
 
     implementation("javax.mail:mail:1.4.7")
 
-    implementation("io.github.cdimascio:dotenv-java:2.2.0")
-
     implementation("com.google.api-client:google-api-client:1.32.1")
     implementation("com.google.oauth-client:google-oauth-client-jetty:1.32.1")
 
     implementation("com.google.apis:google-api-services-gmail:v1-rev110-1.25.0")
+
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.16.0")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.15.2")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.0")
 
     testImplementation(kotlin("test"))
 }

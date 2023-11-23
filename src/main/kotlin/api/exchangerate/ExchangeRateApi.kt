@@ -1,6 +1,5 @@
 package api.exchangerate
 
-import Config
 import com.google.gson.GsonBuilder
 import model.exchangerate.ExchangeRate
 import okhttp3.OkHttpClient
@@ -13,7 +12,7 @@ interface ExchangeRateApi {
 
     @GET("/v6/{apiKey}/latest/{currency}")
     suspend fun getExchangeRate(
-        @Path("apiKey") apiKey: String = Config.ExchangeRate.API_KEY,
+        @Path("apiKey") apiKey: String,
         @Path("currency") currency: String
     ): ExchangeRate
 

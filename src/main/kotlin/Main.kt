@@ -1,74 +1,48 @@
-import api.exchangerate.ExchangeRateApi
-import api.exchangerate.ExchangeRateService
-import api.gametime.BASE_URL as GAME_TIME_URL
-import api.exchangerate.BASE_URL as EXCHANGE_RATE_URL
 import api.gametime.GameTimeApi
 import api.gametime.GameTimeService
+import config.ExchangeRate
+import config.GameTimeConfig
+import config.loadConfig
+import crawler.GameTimeEmailBuilder
+import crawler.GameTimeTicketService
 import crawler.TickerCrawler
 import emailer.EmailService
-import io.github.cdimascio.dotenv.Dotenv
-import kotlinx.coroutines.runBlocking
-import model.exchangerate.ExchangeRate
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import kotlin.concurrent.fixedRateTimer
 
 private const val FIVE_MINUTES = 5L * 60L * 1000L
+private const val TWICE_A_DAY = 12L * 60L * 60L * 1000L
 
 fun main() {
-    val gameTimeApi = GameTimeApi.getRetrofit(GAME_TIME_URL)
+    // Load config
+    val config = loadConfig("config.yml")
 
-    val gameTimeService = GameTimeService(gameTimeApi)
+    // get the exchange rate for USD -> CAD
+    val exchangeRate = ExchangeRate(config.exchangeRate)
 
-    val emailService = EmailService()
+    // Spin up ticket services
+    val gameTimeTicketService = gameTimeInit(config.gameTime, exchangeRate)
 
-    val crawler = TickerCrawler(gameTimeService, emailService)
+    // Email service
+    val emailService = EmailService(config.email)
+
+    val crawler = TickerCrawler(
+        gameTimeTicketService = gameTimeTicketService,
+        gameFilters = config.gameFilters,
+        emailService = emailService
+    )
 
     // Look for tickets every 5 minutes
-    fixedRateTimer("ticket-check", period = FIVE_MINUTES) {
+    fixedRateTimer("ticket-check", period = TWICE_A_DAY) {
         crawler.findTickets()
     }
 }
 
+fun gameTimeInit(config: GameTimeConfig, exchangeRate: ExchangeRate): GameTimeTicketService {
+    val gameTimeApi = GameTimeApi.getRetrofit(config, exchangeRate)
+    val gameTimeService = GameTimeService(gameTimeApi)
+    val gameTimeEmailBuilder = GameTimeEmailBuilder(config.buyUrl)
 
-
-object Config {
-    private val env = Dotenv.configure().load()
-
-    object TicketFilters {
-        val MAX_PRICE: Int = env["MAX_PRICE"].toInt()
-        val GAME_DAYS: List<LocalDate>? = getGameDays()
-
-        private fun getGameDays(): List<LocalDate>? {
-            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-
-            return env["GAME_DAYS"]
-                ?.split(",")
-                ?.map { LocalDate.parse(it, formatter) }
-        }
-    }
-
-
-    object Email {
-        val EMAIL: String = env["EMAIL"]
-        val PASSWORD: String = env["PASSWORD"]
-    }
-
-    object ExchangeRate {
-        val API_KEY: String = env["EXCHANGE_RATE_KEY"]
-    }
+    return GameTimeTicketService(gameTimeService, gameTimeEmailBuilder)
 }
 
-object ExchangeRates {
-    private val exchangeRates: ExchangeRate = getUsdExchangeRate()
 
-    private fun getUsdExchangeRate(): ExchangeRate {
-        val exchangeRateApi = ExchangeRateApi.getRetrofit(EXCHANGE_RATE_URL)
-        val exchangeRateService = ExchangeRateService(exchangeRateApi)
-        return runBlocking {
-            exchangeRateService.usdExchangeRate()
-        }
-    }
-
-    fun cad(): Double? = exchangeRates.conversionRates["CAD"]
-}

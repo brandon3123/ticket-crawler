@@ -1,8 +1,6 @@
 package emailer
 
-import Config
-import model.gametime.GamesWithSeats
-import util.asHtmlEmail
+import config.EmailConfig
 import util.log
 import java.util.*
 import javax.mail.Authenticator
@@ -14,22 +12,24 @@ import javax.mail.Transport
 import javax.mail.internet.InternetAddress
 import javax.mail.internet.MimeMessage
 
-class EmailService {
+class EmailService(
+    private val config: EmailConfig
+) {
 
     private val properties = getEmailProps()
 
-    fun sendEmailNotification(subject: String, gamesWithSeats: GamesWithSeats) {
+    fun sendEmailNotification(subject: String, emailParts: List<String>) {
         // Create an email session
         val session = getSession()
 
         try {
             val message = MimeMessage(session)
-            message.setFrom(InternetAddress(Config.Email.EMAIL))
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(Config.Email.EMAIL))
+            message.setFrom(InternetAddress(config.email))
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(config.recipients.joinToString()))
             message.subject = subject
 
             // Build the email, simple html table for readability
-            val emailBody = gamesWithSeats.asHtmlEmail()
+            val emailBody = emailParts.joinToString("</br></br>")
 
             message.setContent(emailBody, "text/html")
 
@@ -45,7 +45,7 @@ class EmailService {
     private fun getSession(): Session? {
         val session = Session.getInstance(properties, object : Authenticator() {
             override fun getPasswordAuthentication(): PasswordAuthentication {
-                return PasswordAuthentication(Config.Email.EMAIL, Config.Email.PASSWORD)
+                return PasswordAuthentication(config.email, config.password)
             }
         })
         return session

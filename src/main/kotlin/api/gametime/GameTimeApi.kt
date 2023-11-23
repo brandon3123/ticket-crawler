@@ -2,6 +2,8 @@ package api.gametime
 
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
+import config.ExchangeRate
+import config.GameTimeConfig
 import model.gametime.Event
 import model.gametime.Listing
 import okhttp3.OkHttpClient
@@ -26,17 +28,17 @@ interface GameTimeApi {
             return OkHttpClient.Builder().build()
         }
 
-        fun getRetrofit(url: String): GameTimeApi {
+        fun getRetrofit(config: GameTimeConfig, exchangeRate: ExchangeRate): GameTimeApi {
             val eventType = object : TypeToken<ArrayList<Event>>() {}.type
             val listingType = object : TypeToken<ArrayList<Listing>>() {}.type
 
             val gson = GsonBuilder()
                 .registerTypeAdapter(eventType, EventsDeserializer())
-                .registerTypeAdapter(listingType, ListingsDeserializer())
+                .registerTypeAdapter(listingType, ListingsDeserializer(exchangeRate))
                 .create()
 
             return Retrofit.Builder()
-                .baseUrl(url)
+                .baseUrl(config.baseUrl)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(getClient())
                 .build()

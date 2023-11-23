@@ -3,10 +3,11 @@ package api.exchangerate
 import model.exchangerate.ExchangeRate
 
 class ExchangeRateService (
-    val api: ExchangeRateApi
+    private val api: ExchangeRateApi,
+    private val apiKey: String
 ) {
 
     suspend fun usdExchangeRate(): ExchangeRate {
-        return api.getExchangeRate(currency = "USD")
+        return api.getExchangeRate(apiKey, "USD")
     }
 }
