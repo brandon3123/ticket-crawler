@@ -3,6 +3,7 @@ package crawler
 import config.GameFilters
 import emailer.EmailService
 import kotlinx.coroutines.runBlocking
+import service.gametime.GameTimeTicketService
 import util.log
 
 class TickerCrawler(

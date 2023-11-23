@@ -1,5 +1,6 @@
-package api.exchangerate
+package service.exchangerate
 
+import api.exchangerate.ExchangeRateApi
 import model.exchangerate.ExchangeRate
 
 class ExchangeRateService (

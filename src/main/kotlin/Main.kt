@@ -1,10 +1,10 @@
 import api.gametime.GameTimeApi
-import api.gametime.GameTimeService
+import service.gametime.GameTimeService
 import config.ExchangeRate
 import config.GameTimeConfig
 import config.loadConfig
-import crawler.GameTimeEmailBuilder
-import crawler.GameTimeTicketService
+import emailer.gametime.GameTimeEmailBuilder
+import service.gametime.GameTimeTicketService
 import crawler.TickerCrawler
 import emailer.EmailService
 import kotlin.concurrent.fixedRateTimer

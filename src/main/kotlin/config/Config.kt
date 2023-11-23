@@ -1,7 +1,7 @@
 package config
 
 import api.exchangerate.ExchangeRateApi
-import api.exchangerate.ExchangeRateService
+import service.exchangerate.ExchangeRateService
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory

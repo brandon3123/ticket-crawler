@@ -1,8 +1,9 @@
-package crawler
+package service.gametime
 
-import api.gametime.GameTimeService
 import config.GameFilters
+import emailer.gametime.GameTimeEmailBuilder
 import model.gametime.GamesWithSeats
+import service.TicketService
 
 class GameTimeTicketService(
     private val gameTimeService: GameTimeService,

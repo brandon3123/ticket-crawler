@@ -1,5 +1,6 @@
-package crawler
+package emailer.gametime
 
+import emailer.EmailBuilder
 import model.gametime.Event
 import model.gametime.GamesWithSeats
 import model.gametime.Listing

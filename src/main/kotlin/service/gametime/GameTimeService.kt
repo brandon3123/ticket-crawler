@@ -1,5 +1,6 @@
-package api.gametime
+package service.gametime
 
+import api.gametime.GameTimeApi
 import config.GameFilters
 import model.gametime.Event
 import model.gametime.GamesWithSeats
