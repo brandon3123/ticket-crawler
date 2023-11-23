@@ -1,5 +1,5 @@
 email:
-  email: "your-gmail-app-password-email"
+  address: "your-gmail-app-password-email"
   password: "your-gmail-app-password"
   recipients:
     - "receiver1@gmail.com"

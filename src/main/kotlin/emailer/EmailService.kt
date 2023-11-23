@@ -24,7 +24,7 @@ class EmailService(
 
         try {
             val message = MimeMessage(session)
-            message.setFrom(InternetAddress(config.email))
+            message.setFrom(InternetAddress(config.address))
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(config.recipients.joinToString()))
             message.subject = subject
 
@@ -45,7 +45,7 @@ class EmailService(
     private fun getSession(): Session? {
         val session = Session.getInstance(properties, object : Authenticator() {
             override fun getPasswordAuthentication(): PasswordAuthentication {
-                return PasswordAuthentication(config.email, config.password)
+                return PasswordAuthentication(config.address, config.password)
             }
         })
         return session

@@ -64,7 +64,7 @@ data class ExchangeRateConfig(
 )
 
 data class EmailConfig(
-    val email: String,
+    val address: String,
     val password: String,
     val recipients: List<String>
 )
