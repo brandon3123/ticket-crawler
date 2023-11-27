@@ -13,6 +13,7 @@ import kotlin.concurrent.fixedRateTimer
 
 private const val FIVE_MINUTES = 5L * 60L * 1000L
 private const val TWICE_A_DAY = 12L * 60L * 60L * 1000L
+private const val SIX_HOURS = 6L * 60L * 60L * 1000L
 
 fun main() {
     // Load config
@@ -34,7 +35,7 @@ fun main() {
     )
 
     // Look for tickets every 5 minutes
-    fixedRateTimer("ticket-check", period = TWICE_A_DAY) {
+    fixedRateTimer("ticket-check", period = SIX_HOURS) {
         crawler.findTickets()
     }
 }

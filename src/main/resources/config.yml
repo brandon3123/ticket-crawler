@@ -1,3 +1,4 @@
+# email config
 email:
   address: "your-gmail-app-password-email"
   password: "your-gmail-app-password"
@@ -5,18 +6,22 @@ email:
     - "receiver1@gmail.com"
     - "receiver2@gmail.com"
 
+# Exchange rate api info, for converting USD -> CAD
 exchangeRate:
   baseUrl: "https://v6.exchangerate-api.com"
   apiKey: "exchange-rate-api-key"
 
+# Filters for your tickets
 gameFilters:
   maxPrice: 150
+  seats: 2
   days:
     - "2023-12-27"
   teams:
     flames: true
     wranglers: false
 
+# game time website config
 gameTime:
   baseUrl: "https://mobile.gametime.co"
   buyUrl: "https://gametime.co/nhl-hockey"

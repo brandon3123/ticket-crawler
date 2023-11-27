@@ -71,6 +71,7 @@ data class EmailConfig(
 
 data class GameFilters(
     val maxPrice: Int,
+    val seats: Int,
     @JsonFormat(pattern = "yyyy-MM-dd")
     val days: List<LocalDate>?,
     val teams: TeamFilters

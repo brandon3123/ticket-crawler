@@ -49,8 +49,10 @@ private fun List<Listing>.filterSeats(gameFilters: GameFilters): List<Listing> {
     var filteredSeats = this
 
     // add filters here
-    filteredSeats = filteredSeats.isNotPressLevel()
-    filteredSeats = filteredSeats.under(gameFilters.maxPrice)
+    filteredSeats = filteredSeats
+        .notPressLevel()
+        .seats(gameFilters.seats)
+        .under(gameFilters.maxPrice)
 
     return filteredSeats
 }
@@ -60,12 +62,17 @@ fun List<Listing>.under(price: Int) =
         it.price.total.toLong() <= price
     }
 
+fun List<Listing>.seats(numOfSeats: Int) =
+    filter {
+        it.numOfSeats == numOfSeats
+    }
+
 fun List<Event>.forDates(gameDays: List<LocalDate>) =
     filter {
         gameDays.contains(it.time.toLocalDate())
     }
 
-fun List<Listing>.isNotPressLevel() =
+fun List<Listing>.notPressLevel() =
     filter {
         !it.spot.section.startsWith("PL")
     }
