@@ -20,6 +20,11 @@ gameFilters:
   teams:
     flames: true
     wranglers: false
+  opponents:
+    - SEA # Seattle
+#   - VGK # Vegas
+#   - DAL # Seattle
+#   - VAN # Seattle
 
 # game time website config
 gameTime:

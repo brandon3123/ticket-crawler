@@ -9,6 +9,7 @@ import com.google.gson.JsonObject
 import config.ExchangeRate
 import model.gametime.Event
 import model.gametime.Listing
+import model.gametime.Opponent
 import model.gametime.Price
 import java.lang.reflect.Type
 import java.math.RoundingMode
@@ -24,18 +25,33 @@ class EventsDeserializer : JsonDeserializer<ArrayList<Event>> {
         val eventsResponseJson = json?.asJsonObject?.getAsJsonArray("events") ?: JsonArray()
 
         val events = eventsResponseJson
-            .map { it.asJsonObject.get("event") }
             .map {
+                Pair(
+                    it.asJsonObject["event"],
+                    it.asJsonObject["performers"].asJsonArray
+                )
+            }
+            .map { (eventJson, performerJson) ->
+
                 // Get the event data
-                val event = Gson().fromJson(it, Event::class.java)
+                val event = Gson().fromJson(eventJson, Event::class.java)
 
                 // Get the local date/time, and parse it
-                val dateTime = it?.asJsonObject?.get("datetime_local")?.asString
+                val dateTime = eventJson?.asJsonObject?.get("datetime_local")?.asString
                 val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
                 val localDateTime = LocalDateTime.parse(dateTime, formatter)
 
+                // Remove Calgary performers
+                performerJson?.removeAll { performer -> performer?.asJsonObject?.get("name")?.asString?.contains("Calgary") == true }
+
+                // Get the abbreviation for the opponent of the Calgary based team
+                val opponent = performerJson[0].asJsonObject?.get("abbrev")?.asString?.let {
+                    Opponent.valueOf(it)
+                } ?: Opponent.UNKNOWN
+
                 event.copy(
-                    time = localDateTime
+                    time = localDateTime,
+                    opponent = opponent
                 )
             }
 

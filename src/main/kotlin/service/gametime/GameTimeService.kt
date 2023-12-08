@@ -5,6 +5,7 @@ import config.GameFilters
 import model.gametime.Event
 import model.gametime.GamesWithSeats
 import model.gametime.Listing
+import model.gametime.Opponent
 import java.time.LocalDate
 
 class GameTimeService(
@@ -41,6 +42,7 @@ private fun List<Event>.filterGames(gameFilters: GameFilters): List<Event> {
 
     // add filters here
     gameFilters.days?.let { filteredGames = filteredGames.forDates(it) }
+    gameFilters.opponents?.let { filteredGames = filteredGames.vsing(it) }
 
     return filteredGames
 }
@@ -70,6 +72,11 @@ fun List<Listing>.seats(numOfSeats: Int) =
 fun List<Event>.forDates(gameDays: List<LocalDate>) =
     filter {
         gameDays.contains(it.time.toLocalDate())
+    }
+
+fun List<Event>.vsing(opponents: List<Opponent>) =
+    filter {
+        opponents.contains(it.opponent)
     }
 
 fun List<Listing>.notPressLevel() =
