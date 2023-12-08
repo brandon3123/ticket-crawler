@@ -1,12 +1,12 @@
-package emailer.gametime
+package emailer.fansfirst
 
 import emailer.EmailBuilder
-import model.gametime.Event
-import model.gametime.GamesWithSeats
-import model.gametime.Listing
+import model.fansfirst.GamesWithSeats
+import model.fansfirst.Listing
+import model.fansfirst.Event
 import java.time.format.DateTimeFormatter
 
-class GameTimeEmailBuilder(
+class FansFirstEmailBuilder(
     private val buyUrl: String
 ) : EmailBuilder<GamesWithSeats> {
 
@@ -20,7 +20,7 @@ class GameTimeEmailBuilder(
 
         messageBuilder.append("""
             <div>
-                <h2>Game Time Results</h2>
+                <h2>Fans First Results</h2>
             </div>
         """)
 
@@ -29,7 +29,7 @@ class GameTimeEmailBuilder(
             messageBuilder.append(
                 """
             <div>
-                <h3>Seats for ${game.name} at $gameTimeString</h3>
+                <h3>Seats for ${game.longName} at $gameTimeString</h3>
             </div>
             ${seats.asHtmlTable(game)}
             </br>
@@ -57,13 +57,13 @@ class GameTimeEmailBuilder(
     """
 
     private fun Listing.asRow(game: Event): String {
-        val buyLink = buyLink("${buyUrl}/events/${game.id}/listings/$id")
+        val buyLink = buyLink("${buyUrl}/${game.id}/seats/$seatId")
 
         return """<tr style="$borderStyle">
-            <td style="$borderStyle">$${price.total}</td>
+            <td style="$borderStyle">$$price</td>
             <td style="$borderStyle">${spot.section}</td>
             <td style="$borderStyle">${spot.row}</td>
-            <td style="$borderStyle">$numOfSeats</td>
+            <td style="$borderStyle">$noOfSeats</td>
             <td style="$borderStyle">$buyLink</td>
         </tr>"""
     }

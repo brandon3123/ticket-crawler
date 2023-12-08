@@ -30,7 +30,8 @@ data class Config(
     val exchangeRate: ExchangeRateConfig,
     val gameFilters: GameFilters,
     val gameTime: GameTimeConfig,
-    val seatGeek: SeatGeekConfig
+    val seatGeek: SeatGeekConfig,
+    val fansFirst: FansFirstConfig
 )
 
 data class ExchangeRate(
@@ -50,6 +51,11 @@ data class ExchangeRate(
 }
 
 data class GameTimeConfig(
+    val baseUrl: String,
+    val buyUrl: String
+)
+
+data class FansFirstConfig(
     val baseUrl: String,
     val buyUrl: String
 )

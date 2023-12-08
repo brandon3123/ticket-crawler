@@ -12,6 +12,6 @@ data class Event(
 enum class Opponent {
     ANA, ARI, CGY, CHI, COL, DAL, EDM, LA, MIN, NSH, SEA,
     SJ, STL, VAN, VGK, WPG, BOS, BUF, CAR, CBJ, DET, FLA,
-    MTL, NJ, NYI, NYR, OTT, PHI, PIT, TB, TOR, WSH, UNKNOWN
+    MTL, NJ, NYI, NYR, OTT, PHI, PIT, TB, TOR, WSH, UNKNOWN, WIN
 }
 
