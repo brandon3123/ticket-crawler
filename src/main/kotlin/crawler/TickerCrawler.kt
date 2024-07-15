@@ -31,10 +31,7 @@ class TickerCrawler<T : TicketResults>(
     private suspend fun findFlamesTickets() {
         log("Looking for Calgary Flames tickets")
 
-        val emailParts = workers.map {
-            val tickets = it.service.calgaryFlamesTickets(gameFilters)
-            it.emailer.toEmailBody(tickets)
-        }
+        val emailParts = workers.map { it.service.calgaryFlamesTickets(gameFilters) }.map { it.toString() }
 
         // Email them to me if found
         email(

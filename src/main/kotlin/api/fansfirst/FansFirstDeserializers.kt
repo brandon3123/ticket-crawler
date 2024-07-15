@@ -61,8 +61,7 @@ class ListingsDeserializer: JsonDeserializer<ArrayList<Listing>> {
 
                 // Get the spot
                 val row = listingJson.asJsonObject["row"].asString
-                val section = listingJson.asJsonObject["zoneNo"].asLong
-
+                val section = listingJson.asJsonObject["zoneNo"]?.asLong ?: 0
                 listing.copy(
                     spot = Spot(row, section)
                 )

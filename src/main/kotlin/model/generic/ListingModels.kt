@@ -1,17 +1,14 @@
-package model.gametime
+package model.generic
 
 import com.google.gson.annotations.SerializedName
 import java.math.BigDecimal
 
 data class Listing(
     val id: String,
-    val price: Price,
+    val price: BigDecimal,
     val spot: Spot,
-    val numOfSeats: Int
-)
-
-data class Price(
-    val total: BigDecimal
+    val numOfSeats: Int,
+    val zone: String
 )
 
 data class Spot(

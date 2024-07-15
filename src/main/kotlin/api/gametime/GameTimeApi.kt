@@ -4,8 +4,8 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import config.ExchangeRate
 import config.GameTimeConfig
-import model.gametime.Event
-import model.gametime.Listing
+import model.generic.Event
+import model.generic.Listing
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

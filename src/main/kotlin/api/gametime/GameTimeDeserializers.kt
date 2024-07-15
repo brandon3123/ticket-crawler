@@ -7,10 +7,9 @@ import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import config.ExchangeRate
-import model.gametime.Event
-import model.gametime.Listing
-import model.gametime.Opponent
-import model.gametime.Price
+import model.generic.Event
+import model.generic.Listing
+import model.generic.Opponent
 import java.lang.reflect.Type
 import java.math.RoundingMode
 import java.time.LocalDateTime
@@ -46,7 +45,7 @@ class EventsDeserializer : JsonDeserializer<ArrayList<Event>> {
 
                 // Get the abbreviation for the opponent of the Calgary based team
                 val opponent = performerJson[0].asJsonObject?.get("abbrev")?.asString?.let {
-                    Opponent.valueOf(it)
+                    try {Opponent.valueOf(it)} catch (e: Exception) {Opponent.UNKNOWN}
                 } ?: Opponent.UNKNOWN
 
                 event.copy(
@@ -78,7 +77,7 @@ class ListingsDeserializer(
                 val listing = Gson().fromJson(listingJson, Listing::class.java)
 
                 // get USD price, by 2 decimal points
-                val usdPrice = listing.price.total.movePointLeft(2)
+                val usdPrice = listing.price.movePointLeft(2)
 
                 // Convert to CAD, if the exchange rate isn't present. Just use USD
                 val total =
@@ -87,13 +86,11 @@ class ListingsDeserializer(
                         cadPrice.setScale(2, RoundingMode.HALF_UP)
                     } ?: usdPrice
 
-                val price = Price(total)
-
                 // Get the number of seats, per listing
                 val seats = listingJson.asJsonObject["seats"].asJsonArray
 
                 listing.copy(
-                    price = price,
+                    price = total,
                     numOfSeats = seats.size()
                 )
             }

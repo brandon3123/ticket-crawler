@@ -1,4 +1,4 @@
-package model.gametime
+package model.generic
 
 import java.time.LocalDateTime
 
@@ -14,4 +14,3 @@ enum class Opponent {
     SJ, STL, VAN, VGK, WPG, BOS, BUF, CAR, CBJ, DET, FLA,
     MTL, NJ, NYI, NYR, OTT, PHI, PIT, TB, TOR, WSH, UNKNOWN, WIN
 }
-

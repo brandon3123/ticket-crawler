@@ -2,10 +2,10 @@ package service.gametime
 
 import api.gametime.GameTimeApi
 import config.GameFilters
-import model.gametime.Event
-import model.gametime.GamesWithSeats
-import model.gametime.Listing
-import model.gametime.Opponent
+import model.generic.Event
+import model.generic.GamesWithSeats
+import model.generic.Listing
+import model.generic.Opponent as GenericOpponent
 import java.time.LocalDate
 
 class GameTimeService(
@@ -25,7 +25,7 @@ class GameTimeService(
     private suspend fun seats(eventId: String, gameFilters: GameFilters): List<Listing> {
         return api.getListings(eventId)
             .filterSeats(gameFilters)
-            .sortedBy { it.price.total }
+            .sortedBy { it.price }
     }
 
     suspend fun seatsForGames(games: List<Event>, gameFilters: GameFilters): GamesWithSeats {
@@ -61,7 +61,7 @@ private fun List<Listing>.filterSeats(gameFilters: GameFilters): List<Listing> {
 
 fun List<Listing>.under(price: Int) =
     filter {
-        it.price.total.toLong() <= price
+        it.price.toLong() <= price
     }
 
 fun List<Listing>.seats(numOfSeats: Int) =
@@ -74,7 +74,7 @@ fun List<Event>.forDates(gameDays: List<LocalDate>) =
         gameDays.contains(it.time.toLocalDate())
     }
 
-fun List<Event>.vsing(opponents: List<Opponent>) =
+fun List<Event>.vsing(opponents: List<GenericOpponent>) =
     filter {
         opponents.contains(it.opponent)
     }

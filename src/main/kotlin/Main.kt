@@ -11,9 +11,9 @@ import crawler.TickerCrawler
 import emailer.EmailService
 import emailer.fansfirst.FansFirstEmailBuilder
 import model.TicketResults
-import model.gametime.GamesWithSeats as GameTimeTickets
 import model.fansfirst.GamesWithSeats as FansFirstTickets
 import model.TicketWorker
+import model.generic.GamesWithSeats
 import service.fansfirst.FansFirstService
 import service.fansfirst.FansFirstTicketService
 import kotlin.concurrent.fixedRateTimer
@@ -21,10 +21,11 @@ import kotlin.concurrent.fixedRateTimer
 private const val FIVE_MINUTES = 5L * 60L * 1000L
 private const val TWICE_A_DAY = 12L * 60L * 60L * 1000L
 private const val SIX_HOURS = 6L * 60L * 60L * 1000L
+private const val ONE_HOUR = 60L * 60L * 1000L
 
 fun main() {
     // Load config
-    val config = loadConfig("config.yml")
+    val config = loadConfig("real.yml")
 
     // get the exchange rate for USD -> CAD
     val exchangeRate = ExchangeRate(config.exchangeRate)
@@ -48,12 +49,12 @@ fun main() {
     )
 
     // Look for tickets every 5 minutes
-    fixedRateTimer("ticket-check", period = SIX_HOURS) {
+    fixedRateTimer("ticket-check", period = ONE_HOUR) {
         crawler.findTickets()
     }
 }
 
-fun gameTimeWorker(config: GameTimeConfig, exchangeRate: ExchangeRate): TicketWorker<GameTimeTickets> {
+fun gameTimeWorker(config: GameTimeConfig, exchangeRate: ExchangeRate): TicketWorker<GamesWithSeats> {
     val gameTimeApi = GameTimeApi.getRetrofit(config, exchangeRate)
     val gameTimeService = GameTimeService(gameTimeApi)
     val gameTimeEmailBuilder = GameTimeEmailBuilder(config.buyUrl)

@@ -10,7 +10,7 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import kotlinx.coroutines.runBlocking
 import model.exchangerate.ExchangeRate
-import model.gametime.Opponent
+import model.generic.Opponent
 import java.io.FileNotFoundException
 import java.time.LocalDate
 

@@ -1,4 +1,4 @@
-package model.gametime
+package model.generic
 
 import model.TicketResults
 

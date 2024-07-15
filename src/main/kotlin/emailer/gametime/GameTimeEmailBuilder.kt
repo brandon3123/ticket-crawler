@@ -1,9 +1,9 @@
 package emailer.gametime
 
 import emailer.EmailBuilder
-import model.gametime.Event
-import model.gametime.GamesWithSeats
-import model.gametime.Listing
+import model.generic.Event
+import model.generic.GamesWithSeats
+import model.generic.Listing
 import java.time.format.DateTimeFormatter
 
 class GameTimeEmailBuilder(
@@ -60,7 +60,7 @@ class GameTimeEmailBuilder(
         val buyLink = buyLink("${buyUrl}/events/${game.id}/listings/$id")
 
         return """<tr style="$borderStyle">
-            <td style="$borderStyle">$${price.total}</td>
+            <td style="$borderStyle">$${price}</td>
             <td style="$borderStyle">${spot.section}</td>
             <td style="$borderStyle">${spot.row}</td>
             <td style="$borderStyle">$numOfSeats</td>
