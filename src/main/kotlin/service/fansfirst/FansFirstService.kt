@@ -6,6 +6,7 @@ import model.Vendor
 import model.generic.Event
 import model.generic.Listing
 import model.generic.GamesWithSeats
+import model.generic.Opponent
 import java.time.LocalDate
 
 class FansFirstService(
@@ -37,7 +38,7 @@ class FansFirstService(
 
         // add filters here
         gameFilters.days?.let { filteredGames = filteredGames.forDates(it) }
-//        gameFilters.opponents?.let { filteredGames = filteredGames.vsing(it) }
+        gameFilters.opponents?.let { filteredGames = filteredGames.vsing(it) }
 
         return filteredGames
     }
@@ -59,10 +60,10 @@ class FansFirstService(
             gameDays.contains(it.time.toLocalDate())
         }
 
-//    fun List<Event>.vsing(opponents: List<Opponent>) =
-//        filter {
-//            opponents.contains(it.opponent)
-//        }
+    fun List<Event>.vsing(opponents: List<Opponent>) =
+        filter {
+            opponents.contains(it.opponent)
+        }
 
     private fun List<Listing>.notPressLevel() =
         filter {
