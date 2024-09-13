@@ -2,15 +2,17 @@ package crawler
 
 import config.GameFilters
 import emailer.EmailService
+import emailer.EmailBuilder
 import kotlinx.coroutines.runBlocking
-import model.TicketResults
 import model.TicketWorker
+import model.generic.GamesWithSeats
 import util.log
 
-class TickerCrawler<T : TicketResults>(
-    private val workers: List<TicketWorker<T>>,
+class TickerCrawler(
+    private val workers: List<TicketWorker>,
     private val gameFilters: GameFilters,
-    private val emailService: EmailService
+    private val emailService: EmailService,
+    private val emailBuilder: EmailBuilder
 ) {
 
     private val flamesEmailSubject = "Flames Games Tickets - Ticket Crawler"
@@ -19,7 +21,9 @@ class TickerCrawler<T : TicketResults>(
     fun findTickets() {
         runBlocking {
             if (gameFilters.teams.flames) {
-                findFlamesTickets()
+                val tickets = findFlamesTickets()
+                val email = emailBuilder.toEmailBody(tickets)
+                email(flamesEmailSubject, listOf(email))
             }
 
             if (gameFilters.teams.wranglers) {
@@ -28,16 +32,21 @@ class TickerCrawler<T : TicketResults>(
         }
     }
 
-    private suspend fun findFlamesTickets() {
+    private suspend fun findFlamesTickets(): List<GamesWithSeats> {
         log("Looking for Calgary Flames tickets")
 
-        val emailParts = workers.map { it.service.calgaryFlamesTickets(gameFilters) }.map { it.toString() }
+        val emailParts = workers.map {
+            it.service.calgaryFlamesTickets(gameFilters)
+        }
+
+        return emailParts
+
 
         // Email them to me if found
-        email(
-            subject = flamesEmailSubject,
-            emailParts = emailParts
-        )
+//        email(
+//            subject = flamesEmailSubject,
+//            emailParts = emailParts
+//        )
     }
 
     private suspend fun findWranglersTickets() {
@@ -45,14 +54,14 @@ class TickerCrawler<T : TicketResults>(
 
         val emailParts = workers.map {
             val tickets = it.service.calgaryWranglersTickets(gameFilters)
-            it.emailer.toEmailBody(tickets)
+//            it.emailer.toEmailBody(tickets)
         }
 
         // Email them to me if found
-        email(
-            subject = wranglersEmailSubject,
-            emailParts = emailParts
-        )
+//        email(
+//            subject = wranglersEmailSubject,
+//            emailParts = emailParts
+//        )
     }
 
     private fun email(subject: String, emailParts: List<String>) {

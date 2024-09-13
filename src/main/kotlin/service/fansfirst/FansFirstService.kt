@@ -2,9 +2,10 @@ package service.fansfirst
 
 import api.fansfirst.FansFirstApi
 import config.GameFilters
-import model.fansfirst.Event
-import model.fansfirst.Listing
-import model.fansfirst.GamesWithSeats
+import model.Vendor
+import model.generic.Event
+import model.generic.Listing
+import model.generic.GamesWithSeats
 import java.time.LocalDate
 
 class FansFirstService(
@@ -28,7 +29,7 @@ class FansFirstService(
             .associateWith { seats(it.id, gameFilters) }
             .filter { (_, seats) -> seats.isNotEmpty() }
 
-        return GamesWithSeats(data)
+        return GamesWithSeats(data, Vendor.FANS_FIRST)
     }
 
     private fun List<Event>.filterGames(gameFilters: GameFilters): List<Event> {
@@ -75,6 +76,6 @@ class FansFirstService(
 
     private fun List<Listing>.seats(numOfSeats: Int) =
         filter {
-            it.noOfSeats == numOfSeats
+            it.numOfSeats == numOfSeats
         }
 }

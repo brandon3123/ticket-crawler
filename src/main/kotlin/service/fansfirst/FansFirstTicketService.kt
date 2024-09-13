@@ -1,12 +1,13 @@
 package service.fansfirst
 
 import config.GameFilters
-import model.fansfirst.GamesWithSeats
+import model.Vendor
+import model.generic.GamesWithSeats
 import service.TicketService
 
 class FansFirstTicketService(
     private val fansFirstService: FansFirstService
-) : TicketService<GamesWithSeats> {
+) : TicketService {
 
     override suspend fun calgaryFlamesTickets(gameFilters: GameFilters): GamesWithSeats {
         // Fetch upcoming flames games, no press level
@@ -18,6 +19,6 @@ class FansFirstTicketService(
 
     override suspend fun calgaryWranglersTickets(gameFilters: GameFilters): GamesWithSeats {
         //todo
-        return GamesWithSeats(emptyMap())
+        return GamesWithSeats(emptyMap(), Vendor.FANS_FIRST)
     }
 }

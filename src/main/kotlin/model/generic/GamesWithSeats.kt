@@ -1,7 +1,9 @@
 package model.generic
 
-import model.TicketResults
+import model.Vendor
+
 
 data class GamesWithSeats(
-    val data: Map<Event, List<Listing>>
-) : TicketResults
+    val data: Map<Event, List<Listing>>,
+    val vendor: Vendor
+)

@@ -10,7 +10,9 @@ import config.ExchangeRate
 import model.generic.Event
 import model.generic.Listing
 import model.generic.Opponent
+import model.generic.Spot
 import java.lang.reflect.Type
+import java.math.BigDecimal
 import java.math.RoundingMode
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -73,11 +75,23 @@ class ListingsDeserializer(
         val listings = listingsResponse
             .entrySet()
             .map { (_, listingJson) ->
-                // Get the listing data
-                val listing = Gson().fromJson(listingJson, Listing::class.java)
+                val listing = listingJson?.asJsonObject
+
+                // ID
+                val id = listing
+                    ?.getAsJsonPrimitive("id")
+                    ?.asString
+                    ?: ""
+
+                // spot
+                val spot = Gson().fromJson(listingJson, Spot::class.java)
 
                 // get USD price, by 2 decimal points
-                val usdPrice = listing.price.movePointLeft(2)
+                val usdPrice = listing
+                    ?.getAsJsonObject("price")
+                    ?.getAsJsonPrimitive("total")
+                    ?.asBigDecimal?.movePointLeft(2)
+                    ?: BigDecimal.valueOf(0)
 
                 // Convert to CAD, if the exchange rate isn't present. Just use USD
                 val total =
@@ -87,11 +101,13 @@ class ListingsDeserializer(
                     } ?: usdPrice
 
                 // Get the number of seats, per listing
-                val seats = listingJson.asJsonObject["seats"].asJsonArray
+                val numOfSeats = listingJson.asJsonObject["seats"].asJsonArray.size()
 
-                listing.copy(
+                Listing(
+                    id = id,
+                    spot = spot,
                     price = total,
-                    numOfSeats = seats.size()
+                    numOfSeats = numOfSeats
                 )
             }
 

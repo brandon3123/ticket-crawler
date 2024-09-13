@@ -2,9 +2,10 @@ package api.fansfirst
 
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
+import config.ExchangeRate
 import config.FansFirstConfig
-import model.fansfirst.Event
-import model.fansfirst.Listing
+import model.generic.Event
+import model.generic.Listing
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -24,13 +25,13 @@ interface FansFirstApi {
             return OkHttpClient.Builder().build()
         }
 
-        fun getRetrofit(config: FansFirstConfig): FansFirstApi {
+        fun getRetrofit(config: FansFirstConfig, exchangeRate: ExchangeRate): FansFirstApi {
             val eventType = object : TypeToken<ArrayList<Event>>() {}.type
             val listingType = object : TypeToken<ArrayList<Listing>>() {}.type
 
             val gson = GsonBuilder()
                 .registerTypeAdapter(eventType, EventsDeserializer())
-                .registerTypeAdapter(listingType, ListingsDeserializer())
+                .registerTypeAdapter(listingType, ListingsDeserializer(exchangeRate))
                 .create()
 
             return Retrofit.Builder()

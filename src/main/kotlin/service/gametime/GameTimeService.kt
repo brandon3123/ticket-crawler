@@ -2,6 +2,7 @@ package service.gametime
 
 import api.gametime.GameTimeApi
 import config.GameFilters
+import model.Vendor
 import model.generic.Event
 import model.generic.GamesWithSeats
 import model.generic.Listing
@@ -33,7 +34,7 @@ class GameTimeService(
             .associateWith { seats(it.id, gameFilters) }
             .filter { (_, seats) -> seats.isNotEmpty() }
 
-        return GamesWithSeats(data)
+        return GamesWithSeats(data, Vendor.GAME_TIME)
     }
 }
 

@@ -5,15 +5,12 @@ import config.ExchangeRate
 import config.FansFirstConfig
 import config.GameTimeConfig
 import config.loadConfig
-import emailer.gametime.GameTimeEmailBuilder
+import emailer.EmailBuilder
 import service.gametime.GameTimeTicketService
 import crawler.TickerCrawler
 import emailer.EmailService
-import emailer.fansfirst.FansFirstEmailBuilder
-import model.TicketResults
-import model.fansfirst.GamesWithSeats as FansFirstTickets
+//import emailer.fansfirst.FansFirstEmailBuilder
 import model.TicketWorker
-import model.generic.GamesWithSeats
 import service.fansfirst.FansFirstService
 import service.fansfirst.FansFirstTicketService
 import kotlin.concurrent.fixedRateTimer
@@ -34,18 +31,19 @@ fun main() {
     val emailService = EmailService(config.email)
 
     val gameTimeWorker = gameTimeWorker(config.gameTime, exchangeRate)
-    val fansFirstWorker = fansFirstWorker(config.fansFirst)
+    val fansFirstWorker = fansFirstWorker(config.fansFirst, exchangeRate)
 
     val workers = listOf(
         fansFirstWorker,
-        gameTimeWorker
+//        gameTimeWorker
         // Add workers for another ticket site integration
-    ) as List<TicketWorker<TicketResults>>
+    )
 
     val crawler = TickerCrawler(
         workers,
         gameFilters = config.gameFilters,
         emailService = emailService,
+        emailBuilder = EmailBuilder(config.gameTime.buyUrl, config.fansFirst.buyUrl)
     )
 
     // Look for tickets every 5 minutes
@@ -54,22 +52,20 @@ fun main() {
     }
 }
 
-fun gameTimeWorker(config: GameTimeConfig, exchangeRate: ExchangeRate): TicketWorker<GamesWithSeats> {
+fun gameTimeWorker(config: GameTimeConfig, exchangeRate: ExchangeRate): TicketWorker {
     val gameTimeApi = GameTimeApi.getRetrofit(config, exchangeRate)
     val gameTimeService = GameTimeService(gameTimeApi)
-    val gameTimeEmailBuilder = GameTimeEmailBuilder(config.buyUrl)
     val gameTimeTicketService = GameTimeTicketService(gameTimeService)
 
-    return TicketWorker(gameTimeTicketService, gameTimeEmailBuilder)
+    return TicketWorker(gameTimeTicketService)
 }
 
-fun fansFirstWorker(config: FansFirstConfig): TicketWorker<FansFirstTickets> {
-    val fansFirstApi = FansFirstApi.getRetrofit(config)
+fun fansFirstWorker(config: FansFirstConfig, exchangeRate: ExchangeRate): TicketWorker {
+    val fansFirstApi = FansFirstApi.getRetrofit(config, exchangeRate)
     val fansFirstService = FansFirstService(fansFirstApi)
-    val fansFirstEmailBuilder = FansFirstEmailBuilder(config.buyUrl)
     val fansFirstTicketService = FansFirstTicketService(fansFirstService)
 
-    return TicketWorker(fansFirstTicketService, fansFirstEmailBuilder)
+    return TicketWorker(fansFirstTicketService)
 }
 
 

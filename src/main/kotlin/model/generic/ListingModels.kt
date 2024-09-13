@@ -8,7 +8,7 @@ data class Listing(
     val price: BigDecimal,
     val spot: Spot,
     val numOfSeats: Int,
-    val zone: String
+    val zone: String? = null
 )
 
 data class Spot(
