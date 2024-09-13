@@ -47,6 +47,7 @@ class EmailBuilder{
         """    
     <table style="width:25%; text-align: center; $borderStyle">
             <tr style="$borderStyle">
+            <th style="$borderStyle">Vendor</th>
             <th style="$borderStyle">Price</th>
             <th style="$borderStyle">Section</th>
             <th style="$borderStyle">Row</th>
@@ -61,6 +62,7 @@ class EmailBuilder{
         val buyLink = buyLink(vendor.buyUrl(game.id, this.id))
 
         return """<tr style="$borderStyle">
+            <td style="$borderStyle">${vendor.name}</td>
             <td style="$borderStyle">$${price}</td>
             <td style="$borderStyle">${spot.section}</td>
             <td style="$borderStyle">${spot.row}</td>

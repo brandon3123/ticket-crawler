@@ -10,23 +10,43 @@ data class Event(
 )
 
 
-
 enum class Opponent(val team: String) {
 
-
-
-    ANA("asd"), ARI("asd"), CGY("asd"), CHI("asd"), COL("asd"), DAL("asd"), EDM("Edmonton Oilers"), LA("asd"), MIN("asd"), NSH("asd"), SEA(
-    "asd"
-    ),
-    SJ("asd"), STL("asd"), VAN("asd"), VGK("asd"), WPG("asd"), BOS("asd"), BUF("asd"), CAR("asd"), CBJ("asd"), DET("asd"), FLA(
-    "asd"
-    ),
-    MTL("asd"), NJ("asd"), NYI("asd"), NYR("asd"), OTT("asd"), PHI("asd"), PIT("asd"), TB("asd"), TOR("asd"), WSH("asd"), UNKNOWN(
-    "asd"
-    ), WIN("asd")
+    ANA("Anaheim Ducks"),
+    UTAH("Utah Hockey Club"),// maybe
+    CGY("Calgary Flames"),
+    CHI("Chicago Blackhawks"),
+    COL("Colorado Avalanche"),
+    DAL("Dallas Stars"),
+    EDM("Edmonton Oilers"),
+    LA("Los Angeles Kings"),
+    MIN("Minnesota Wild"),
+    NSH("Nashville Predators"),
+    SEA("Seattle Kraken"),
+    SJ("San Jose Sharks"),
+    STL("St.Louis Blues"),
+    VAN("Vancouver Canucks"),
+    VGK("Vegas Golden Knights"),
+    WPG("Winnipeg Jets"),
+    BOS("Boston Bruins"),
+    BUF("Buffalo Sabres"),
+    CAR("Carolina Hurricanes"),
+    CBJ("Columbus Blue Jackets"),
+    DET("Detroit Red Wings"),
+    FLA("Florida Panthers"),
+    MTL("Montreal Canadiens"),
+    NJ("New Jersey Devils"),
+    NYI("New York Islanders"),
+    NYR("New York Rangers"),
+    OTT("Ottawa Senators"),
+    PHI("Philadelphia Flyers"),
+    PIT("Pittsburgh Penguins"),
+    TB("Tamp Bay Lightning"),
+    TOR("Toronto Maple Leafs"),
+    WSH("Washington Capitals"),
+    WIN("Winnipeg Jets"),
+    UNKNOWN("unknown");
 }
-
-
 
 private val lookup = Opponent.values().associateBy(Opponent::team)
 

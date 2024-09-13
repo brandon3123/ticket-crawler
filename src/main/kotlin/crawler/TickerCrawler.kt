@@ -3,6 +3,9 @@ package crawler
 import config.GameFilters
 import emailer.EmailService
 import emailer.EmailBuilder
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.runBlocking
 import model.TicketWorker
 import model.generic.GamesWithSeats
@@ -35,8 +38,12 @@ class TickerCrawler(
     private suspend fun findFlamesTickets(): List<GamesWithSeats> {
         log("Looking for Calgary Flames tickets")
 
-        val emailParts = workers.map {
-            it.service.calgaryFlamesTickets(gameFilters)
+        val emailParts = coroutineScope {
+            // this isn't working, not calling async. improve this
+            workers.map {
+                async { it.service.calgaryFlamesTickets(gameFilters) }
+            }.awaitAll()
+
         }
 
         return emailParts

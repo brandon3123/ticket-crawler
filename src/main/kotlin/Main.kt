@@ -9,7 +9,6 @@ import emailer.EmailBuilder
 import service.gametime.GameTimeTicketService
 import crawler.TickerCrawler
 import emailer.EmailService
-//import emailer.fansfirst.FansFirstEmailBuilder
 import model.TicketWorker
 import service.fansfirst.FansFirstService
 import service.fansfirst.FansFirstTicketService
@@ -32,10 +31,11 @@ fun main() {
 
     val gameTimeWorker = gameTimeWorker(config.gameTime, exchangeRate)
     val fansFirstWorker = fansFirstWorker(config.fansFirst, exchangeRate)
+    val emailBuilder = EmailBuilder()
 
     val workers = listOf(
         fansFirstWorker,
-//        gameTimeWorker
+        gameTimeWorker
         // Add workers for another ticket site integration
     )
 
@@ -43,7 +43,7 @@ fun main() {
         workers,
         gameFilters = config.gameFilters,
         emailService = emailService,
-        emailBuilder = EmailBuilder(config.gameTime.buyUrl, config.fansFirst.buyUrl)
+        emailBuilder = emailBuilder
     )
 
     // Look for tickets every 5 minutes

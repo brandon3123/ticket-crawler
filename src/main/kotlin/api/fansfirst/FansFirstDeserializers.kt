@@ -1,6 +1,5 @@
 package api.fansfirst
 
-import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
@@ -13,7 +12,6 @@ import model.generic.Spot
 import model.generic.opponent
 import java.lang.reflect.Type
 import java.math.BigDecimal
-import java.math.RoundingMode
 import java.time.Instant
 import java.time.LocalDateTime
 import java.util.TimeZone
@@ -64,23 +62,16 @@ class ListingsDeserializer(exchangeRate: ExchangeRate) : JsonDeserializer<ArrayL
     ): ArrayList<Listing> {
         val listingsResponse = json?.asJsonArray ?: JsonArray()
 
+        println("fan first list")
+
         val listings = listingsResponse
             .map { listingJson ->
                 // Get the listing data
 
                 val id = listingJson.asJsonObject["seatId"].asString
 
-                // get USD price, by 2 decimal points
-                val usdPrice = listingJson.asJsonObject["price"]
-                    ?.asBigDecimal?.movePointLeft(2)
-                    ?: BigDecimal.valueOf(0)
-
-                // Convert to CAD, if the exchange rate isn't present. Just use USD
-                val total =
-                    cadExchangeRate?.let { cadExchangeRate ->
-                        val cadPrice = usdPrice * cadExchangeRate.toBigDecimal()
-                        cadPrice.setScale(2, RoundingMode.HALF_UP)
-                    } ?: usdPrice
+                // get price
+                val price = listingJson.asJsonObject["price"]?.asBigDecimal ?: BigDecimal.ZERO
 
                 // Get the spot
                 val row = listingJson.asJsonObject["row"].asLong
@@ -92,7 +83,7 @@ class ListingsDeserializer(exchangeRate: ExchangeRate) : JsonDeserializer<ArrayL
 
                 Listing(
                     id = id,
-                    price = total,
+                    price = price,
                     spot = spot,
                     numOfSeats = numOfSeats
                 )
