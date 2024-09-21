@@ -10,7 +10,7 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import kotlinx.coroutines.runBlocking
 import model.exchangerate.ExchangeRate
-import model.generic.Opponent
+import model.NHLTeam
 import java.io.FileNotFoundException
 import java.time.LocalDate
 
@@ -82,7 +82,7 @@ data class GameFilters(
     @JsonFormat(pattern = "yyyy-MM-dd")
     val days: List<LocalDate>?,
     val teams: TeamFilters,
-    val opponents: List<Opponent>?
+    val opponents: List<NHLTeam>?
 )
 
 data class TeamFilters(

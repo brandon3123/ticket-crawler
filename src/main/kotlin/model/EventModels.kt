@@ -1,4 +1,4 @@
-package model.generic
+package model
 
 import java.time.LocalDateTime
 
@@ -6,11 +6,12 @@ data class Event(
     val id: String,
     val name: String,
     val time: LocalDateTime,
-    val opponent: Opponent
+    val team: NHLTeam,
+    val vendor: Vendor
 )
 
 
-enum class Opponent(val team: String) {
+enum class NHLTeam(val team: String) {
 
     ANA("Anaheim Ducks"),
     UTAH("Utah Hockey Club"),// maybe
@@ -48,6 +49,6 @@ enum class Opponent(val team: String) {
     UNKNOWN("unknown");
 }
 
-private val lookup = Opponent.values().associateBy(Opponent::team)
+private val lookup = NHLTeam.values().associateBy(NHLTeam::team)
 
 fun String.opponent() = lookup[this]

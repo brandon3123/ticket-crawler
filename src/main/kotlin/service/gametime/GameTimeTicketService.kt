@@ -1,7 +1,7 @@
 package service.gametime
 
 import config.GameFilters
-import model.generic.GamesWithSeats
+import model.GamesWithSeats
 import service.TicketService
 
 class GameTimeTicketService(

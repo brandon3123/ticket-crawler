@@ -3,10 +3,10 @@ package service.gametime
 import api.gametime.GameTimeApi
 import config.GameFilters
 import model.Vendor
-import model.generic.Event
-import model.generic.GamesWithSeats
-import model.generic.Listing
-import model.generic.Opponent as GenericOpponent
+import model.Event
+import model.GamesWithSeats
+import model.Listing
+import model.NHLTeam as GenericOpponent
 import java.time.LocalDate
 
 class GameTimeService(
@@ -77,7 +77,7 @@ fun List<Event>.forDates(gameDays: List<LocalDate>) =
 
 fun List<Event>.vsing(opponents: List<GenericOpponent>) =
     filter {
-        opponents.contains(it.opponent)
+        opponents.contains(it.team)
     }
 
 fun List<Listing>.notPressLevel() =

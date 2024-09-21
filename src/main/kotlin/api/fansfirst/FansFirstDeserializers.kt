@@ -5,11 +5,12 @@ import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import config.ExchangeRate
-import model.generic.Event
-import model.generic.Listing
-import model.generic.Opponent
-import model.generic.Spot
-import model.generic.opponent
+import model.Event
+import model.Listing
+import model.NHLTeam
+import model.Spot
+import model.Vendor
+import model.opponent
 import java.lang.reflect.Type
 import java.math.BigDecimal
 import java.time.Instant
@@ -37,13 +38,14 @@ class EventsDeserializer : JsonDeserializer<ArrayList<Event>> {
                     LocalDateTime.ofInstant(Instant.ofEpochMilli(dateTime), TimeZone.getDefault().toZoneId())
 
                 // Get the abbreviation for the opponent of the Calgary based team
-                val opponent = eventJson?.asJsonObject?.get("opponent")?.asString?.opponent() ?: Opponent.UNKNOWN
+                val team = eventJson?.asJsonObject?.get("opponent")?.asString?.opponent() ?: NHLTeam.UNKNOWN
 
                 Event(
                     id = id,
                     name = name,
                     time = localDateTime,
-                    opponent = opponent
+                    team = team,
+                    vendor = Vendor.FANS_FIRST
                 )
             }
 
@@ -77,7 +79,7 @@ class ListingsDeserializer(exchangeRate: ExchangeRate) : JsonDeserializer<ArrayL
                 val row = listingJson.asJsonObject["row"].asLong
                 val section = listingJson.asJsonObject["zoneNo"]?.asString ?: ""
 
-                val spot = Spot(row, section, "asdasd")
+                val spot = Spot(row, section)
 
                 val numOfSeats = listingJson.asJsonObject["sellOption"]?.asInt ?: 0
 
@@ -85,7 +87,8 @@ class ListingsDeserializer(exchangeRate: ExchangeRate) : JsonDeserializer<ArrayL
                     id = id,
                     price = price,
                     spot = spot,
-                    numOfSeats = numOfSeats
+                    numOfSeats = numOfSeats,
+                    vendor = Vendor.FANS_FIRST
                 )
             }
 

@@ -3,10 +3,10 @@ package service.fansfirst
 import api.fansfirst.FansFirstApi
 import config.GameFilters
 import model.Vendor
-import model.generic.Event
-import model.generic.Listing
-import model.generic.GamesWithSeats
-import model.generic.Opponent
+import model.Event
+import model.Listing
+import model.GamesWithSeats
+import model.NHLTeam
 import java.time.LocalDate
 
 class FansFirstService(
@@ -60,9 +60,9 @@ class FansFirstService(
             gameDays.contains(it.time.toLocalDate())
         }
 
-    fun List<Event>.vsing(opponents: List<Opponent>) =
+    fun List<Event>.vsing(opponents: List<NHLTeam>) =
         filter {
-            opponents.contains(it.opponent)
+            opponents.contains(it.team)
         }
 
     private fun List<Listing>.notPressLevel() =

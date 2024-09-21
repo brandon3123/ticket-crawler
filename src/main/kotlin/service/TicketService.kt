@@ -1,7 +1,7 @@
 package service
 
 import config.GameFilters
-import model.generic.GamesWithSeats
+import model.GamesWithSeats
 
 interface TicketService {
     suspend fun calgaryFlamesTickets(gameFilters: GameFilters): GamesWithSeats

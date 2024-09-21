@@ -7,10 +7,11 @@ import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import config.ExchangeRate
-import model.generic.Event
-import model.generic.Listing
-import model.generic.Opponent
-import model.generic.Spot
+import model.Event
+import model.Listing
+import model.NHLTeam
+import model.Spot
+import model.Vendor
 import java.lang.reflect.Type
 import java.math.BigDecimal
 import java.math.RoundingMode
@@ -46,13 +47,16 @@ class EventsDeserializer : JsonDeserializer<ArrayList<Event>> {
                 performerJson?.removeAll { performer -> performer?.asJsonObject?.get("name")?.asString?.contains("Calgary") == true }
 
                 // Get the abbreviation for the opponent of the Calgary based team
-                val opponent = performerJson[0].asJsonObject?.get("abbrev")?.asString?.let {
-                    try {Opponent.valueOf(it)} catch (e: Exception) {Opponent.UNKNOWN}
-                } ?: Opponent.UNKNOWN
+                val team = performerJson[0].asJsonObject?.get("abbrev")?.asString?.let {
+                    try {
+                        NHLTeam.valueOf(it)} catch (e: Exception) {
+                        NHLTeam.UNKNOWN}
+                } ?: NHLTeam.UNKNOWN
 
                 event.copy(
                     time = localDateTime,
-                    opponent = opponent
+                    team = team,
+                    vendor = Vendor.GAME_TIME
                 )
             }
 
@@ -109,7 +113,8 @@ class ListingsDeserializer(
                     id = id,
                     spot = spot,
                     price = total,
-                    numOfSeats = numOfSeats
+                    numOfSeats = numOfSeats,
+                    vendor = Vendor.GAME_TIME
                 )
             }
 

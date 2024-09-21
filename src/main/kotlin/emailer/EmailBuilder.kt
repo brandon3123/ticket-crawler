@@ -1,41 +1,39 @@
 package emailer
 
-import model.Vendor
 import model.Vendor.Companion.buyUrl
-import model.generic.Event
-import model.generic.GamesWithSeats
-import model.generic.Listing
+import model.Ticket
+import model.TicketId
 import java.time.format.DateTimeFormatter
 
-class EmailBuilder{
+class EmailBuilder {
 
     private val borderStyle = "border:1px solid black;"
     private val niceDateFormat = DateTimeFormatter.ofPattern("MMMM dd, yyyy 'at' h:mm a")
 
-    fun toEmailBody(data: List<GamesWithSeats>): String {
+    fun toEmailBody(tickets: Map<TicketId, List<Ticket>>): String {
         val messageBuilder = StringBuilder()
 
         messageBuilder.append("<html><body>")
 
-        messageBuilder.append("""
+        messageBuilder.append(
+            """
             <div>
                 <h2>Game Time Results</h2>
             </div>
-        """)
+        """
+        )
 
-        data.forEach {
-            it.data.forEach { (game, seats) ->
-                val gameTimeString = niceDateFormat.format(game.time).toString()
-                messageBuilder.append(
-                    """
+        tickets.forEach { (id, seats) ->
+            val gameTimeString = niceDateFormat.format(id.time).toString()
+            messageBuilder.append(
+                """
             <div>
-                <h3>Seats for ${game.name} at $gameTimeString</h3>
+                <h3>Seats for ${id.opponent.team} at ${id.host.team} at $gameTimeString</h3>
             </div>
-            ${seats.asHtmlTable(game, it.vendor)}
+            ${seats.asHtmlTable()}
             </br>
             """
-                )
-            }
+            )
         }
 
         messageBuilder.append("</body></html>")
@@ -43,7 +41,7 @@ class EmailBuilder{
         return messageBuilder.toString()
     }
 
-    private fun List<Listing>.asHtmlTable(game: Event, vendor: Vendor) =
+    private fun List<Ticket>.asHtmlTable() =
         """    
     <table style="width:25%; text-align: center; $borderStyle">
             <tr style="$borderStyle">
@@ -54,19 +52,20 @@ class EmailBuilder{
             <th style="$borderStyle">Seats</th>
             <th style="$borderStyle">Purchase</th>
             </tr>
-            ${joinToString("\n") { it.asRow(game, vendor) }}
+            ${joinToString("\n") { it.asRow() }}
             </table>
     """
 
-    private fun Listing.asRow(game: Event, vendor: Vendor): String {
-        val buyLink = buyLink(vendor.buyUrl(game.id, this.id))
+    private fun Ticket.asRow(): String {
+        val v = this.vendorListing.vendor
+        val buyLink = buyLink(v.buyUrl(this.vendorEvent.id, this.vendorListing.id))
 
         return """<tr style="$borderStyle">
-            <td style="$borderStyle">${vendor.name}</td>
-            <td style="$borderStyle">$${price}</td>
-            <td style="$borderStyle">${spot.section}</td>
-            <td style="$borderStyle">${spot.row}</td>
-            <td style="$borderStyle">$numOfSeats</td>
+            <td style="$borderStyle">${v.name}</td>
+            <td style="$borderStyle">$${this.vendorListing.price}</td>
+            <td style="$borderStyle">${this.vendorListing.spot.section}</td>
+            <td style="$borderStyle">${this.vendorListing.spot.row}</td>
+            <td style="$borderStyle">${this.vendorListing.numOfSeats}</td>
             <td style="$borderStyle">$buyLink</td>
         </tr>"""
     }

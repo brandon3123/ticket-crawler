@@ -2,7 +2,7 @@ package service.fansfirst
 
 import config.GameFilters
 import model.Vendor
-import model.generic.GamesWithSeats
+import model.GamesWithSeats
 import service.TicketService
 
 class FansFirstTicketService(

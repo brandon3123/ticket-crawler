@@ -2,20 +2,20 @@ package crawler
 
 import config.GameFilters
 import emailer.EmailService
-import emailer.EmailBuilder
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.runBlocking
 import model.TicketWorker
-import model.generic.GamesWithSeats
+import model.NHLTeam
+import model.Ticket
+import model.TicketId
 import util.log
 
 class TickerCrawler(
     private val workers: List<TicketWorker>,
     private val gameFilters: GameFilters,
-    private val emailService: EmailService,
-    private val emailBuilder: EmailBuilder
+    private val emailService: EmailService
 ) {
 
     private val flamesEmailSubject = "Flames Games Tickets - Ticket Crawler"
@@ -24,9 +24,7 @@ class TickerCrawler(
     fun findTickets() {
         runBlocking {
             if (gameFilters.teams.flames) {
-                val tickets = findFlamesTickets()
-                val email = emailBuilder.toEmailBody(tickets)
-                email(flamesEmailSubject, listOf(email))
+                findFlamesTickets()
             }
 
             if (gameFilters.teams.wranglers) {
@@ -35,25 +33,45 @@ class TickerCrawler(
         }
     }
 
-    private suspend fun findFlamesTickets(): List<GamesWithSeats> {
+    private suspend fun findFlamesTickets() {
         log("Looking for Calgary Flames tickets")
 
-        val emailParts = coroutineScope {
-            // this isn't working, not calling async. improve this
+        // Fetch tickets from vendors async
+        val ticketsForVendors = coroutineScope {
             workers.map {
                 async { it.service.calgaryFlamesTickets(gameFilters) }
             }.awaitAll()
-
         }
 
-        return emailParts
+        val combinedTickets = mutableMapOf<TicketId, List<Ticket>>()
 
+        ticketsForVendors.flatMap { (data, _) ->
+            data.toList()
+        }.map { (event, listings) ->
+            val ticketId = TicketId(event.time, NHLTeam.CGY, event.team)
+            val tickets = combinedTickets[ticketId]
+
+            if (tickets != null) {
+                val seats = tickets.map { t -> t.vendorListing } + listings
+                seats.sortedBy { it.price }
+
+                val finalTickets = seats.map { Ticket(event, it) }
+
+                combinedTickets[ticketId] = finalTickets
+            } else {
+                combinedTickets[ticketId] = listings.map { Ticket(event, it) }
+            }
+        }
+
+        val results = combinedTickets.map { (id, tickets) ->
+            id to tickets.sortedBy { it.vendorListing.price }
+        }.toMap()
 
         // Email them to me if found
-//        email(
-//            subject = flamesEmailSubject,
-//            emailParts = emailParts
-//        )
+        email(
+            subject = flamesEmailSubject,
+            tickets = results
+        )
     }
 
     private suspend fun findWranglersTickets() {
@@ -71,11 +89,11 @@ class TickerCrawler(
 //        )
     }
 
-    private fun email(subject: String, emailParts: List<String>) {
-        if (emailParts.isNotEmpty()) {
+    private fun email(subject: String, tickets: Map<TicketId, List<Ticket>>) {
+        if (tickets.isNotEmpty()) {
             emailService.sendEmailNotification(
                 subject = subject,
-                emailParts = emailParts
+                tickets = tickets
             )
         } else {
             log("No tickets found")

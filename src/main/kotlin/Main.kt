@@ -21,17 +21,17 @@ private const val ONE_HOUR = 60L * 60L * 1000L
 
 fun main() {
     // Load config
-    val config = loadConfig("real.yml")
+    val config = loadConfig("config.yml")
 
     // get the exchange rate for USD -> CAD
     val exchangeRate = ExchangeRate(config.exchangeRate)
 
     // Email service
-    val emailService = EmailService(config.email)
+    val emailBuilder = EmailBuilder()
+    val emailService = EmailService(config.email, emailBuilder)
 
     val gameTimeWorker = gameTimeWorker(config.gameTime, exchangeRate)
     val fansFirstWorker = fansFirstWorker(config.fansFirst, exchangeRate)
-    val emailBuilder = EmailBuilder()
 
     val workers = listOf(
         fansFirstWorker,
@@ -42,8 +42,7 @@ fun main() {
     val crawler = TickerCrawler(
         workers,
         gameFilters = config.gameFilters,
-        emailService = emailService,
-        emailBuilder = emailBuilder
+        emailService = emailService
     )
 
     // Look for tickets every 5 minutes

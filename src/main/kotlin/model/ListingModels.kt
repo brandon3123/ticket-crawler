@@ -1,6 +1,5 @@
-package model.generic
+package model
 
-import com.google.gson.annotations.SerializedName
 import java.math.BigDecimal
 
 data class Listing(
@@ -8,11 +7,11 @@ data class Listing(
     val price: BigDecimal,
     val spot: Spot,
     val numOfSeats: Int,
-    val zone: String? = null
+    val zone: String? = null,
+    val vendor: Vendor
 )
 
 data class Spot(
     val row: Long,
-    val section: String,
-    @SerializedName("view_url") val viewUrl: String
+    val section: String
 )
