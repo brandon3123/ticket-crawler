@@ -1,9 +1,9 @@
 package service
 
 import config.GameFilters
-import model.TicketResults
+import model.GamesWithSeats
 
-interface TicketService<T: TicketResults> {
-    suspend fun calgaryFlamesTickets(gameFilters: GameFilters): T
-    suspend fun calgaryWranglersTickets(gameFilters: GameFilters): T
+interface TicketService {
+    suspend fun calgaryFlamesTickets(gameFilters: GameFilters): GamesWithSeats
+    suspend fun calgaryWranglersTickets(gameFilters: GameFilters): GamesWithSeats
 }

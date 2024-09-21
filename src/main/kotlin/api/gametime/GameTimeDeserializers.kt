@@ -7,11 +7,13 @@ import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import config.ExchangeRate
-import model.gametime.Event
-import model.gametime.Listing
-import model.gametime.Opponent
-import model.gametime.Price
+import model.Event
+import model.Listing
+import model.NHLTeam
+import model.Spot
+import model.Vendor
 import java.lang.reflect.Type
+import java.math.BigDecimal
 import java.math.RoundingMode
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -45,13 +47,16 @@ class EventsDeserializer : JsonDeserializer<ArrayList<Event>> {
                 performerJson?.removeAll { performer -> performer?.asJsonObject?.get("name")?.asString?.contains("Calgary") == true }
 
                 // Get the abbreviation for the opponent of the Calgary based team
-                val opponent = performerJson[0].asJsonObject?.get("abbrev")?.asString?.let {
-                    Opponent.valueOf(it)
-                } ?: Opponent.UNKNOWN
+                val team = performerJson[0].asJsonObject?.get("abbrev")?.asString?.let {
+                    try {
+                        NHLTeam.valueOf(it)} catch (e: Exception) {
+                        NHLTeam.UNKNOWN}
+                } ?: NHLTeam.UNKNOWN
 
                 event.copy(
                     time = localDateTime,
-                    opponent = opponent
+                    team = team,
+                    vendor = Vendor.GAME_TIME
                 )
             }
 
@@ -71,14 +76,28 @@ class ListingsDeserializer(
     ): ArrayList<Listing> {
         val listingsResponse = json?.asJsonObject?.getAsJsonObject("listings") ?: JsonObject()
 
+        println("game time list")
+
         val listings = listingsResponse
             .entrySet()
             .map { (_, listingJson) ->
-                // Get the listing data
-                val listing = Gson().fromJson(listingJson, Listing::class.java)
+                val listing = listingJson?.asJsonObject
+
+                // ID
+                val id = listing
+                    ?.getAsJsonPrimitive("id")
+                    ?.asString
+                    ?: ""
+
+                // spot
+                val spot = Gson().fromJson(listingJson, Spot::class.java)
 
                 // get USD price, by 2 decimal points
-                val usdPrice = listing.price.total.movePointLeft(2)
+                val usdPrice = listing
+                    ?.getAsJsonObject("price")
+                    ?.getAsJsonPrimitive("total")
+                    ?.asBigDecimal?.movePointLeft(2)
+                    ?: BigDecimal.valueOf(0)
 
                 // Convert to CAD, if the exchange rate isn't present. Just use USD
                 val total =
@@ -87,14 +106,15 @@ class ListingsDeserializer(
                         cadPrice.setScale(2, RoundingMode.HALF_UP)
                     } ?: usdPrice
 
-                val price = Price(total)
-
                 // Get the number of seats, per listing
-                val seats = listingJson.asJsonObject["seats"].asJsonArray
+                val numOfSeats = listingJson.asJsonObject["seats"].asJsonArray.size()
 
-                listing.copy(
-                    price = price,
-                    numOfSeats = seats.size()
+                Listing(
+                    id = id,
+                    spot = spot,
+                    price = total,
+                    numOfSeats = numOfSeats,
+                    vendor = Vendor.GAME_TIME
                 )
             }
 

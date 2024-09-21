@@ -1,12 +1,12 @@
 package service.gametime
 
 import config.GameFilters
-import model.gametime.GamesWithSeats
+import model.GamesWithSeats
 import service.TicketService
 
 class GameTimeTicketService(
     private val gameTimeService: GameTimeService
-) : TicketService<GamesWithSeats> {
+) : TicketService {
 
     override suspend fun calgaryFlamesTickets(gameFilters: GameFilters): GamesWithSeats {
         // Fetch upcoming flames games, no press level

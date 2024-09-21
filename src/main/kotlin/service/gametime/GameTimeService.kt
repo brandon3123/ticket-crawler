@@ -2,10 +2,11 @@ package service.gametime
 
 import api.gametime.GameTimeApi
 import config.GameFilters
-import model.gametime.Event
-import model.gametime.GamesWithSeats
-import model.gametime.Listing
-import model.gametime.Opponent
+import model.Vendor
+import model.Event
+import model.GamesWithSeats
+import model.Listing
+import model.NHLTeam as GenericOpponent
 import java.time.LocalDate
 
 class GameTimeService(
@@ -25,7 +26,7 @@ class GameTimeService(
     private suspend fun seats(eventId: String, gameFilters: GameFilters): List<Listing> {
         return api.getListings(eventId)
             .filterSeats(gameFilters)
-            .sortedBy { it.price.total }
+            .sortedBy { it.price }
     }
 
     suspend fun seatsForGames(games: List<Event>, gameFilters: GameFilters): GamesWithSeats {
@@ -33,7 +34,7 @@ class GameTimeService(
             .associateWith { seats(it.id, gameFilters) }
             .filter { (_, seats) -> seats.isNotEmpty() }
 
-        return GamesWithSeats(data)
+        return GamesWithSeats(data, Vendor.GAME_TIME)
     }
 }
 
@@ -61,7 +62,7 @@ private fun List<Listing>.filterSeats(gameFilters: GameFilters): List<Listing> {
 
 fun List<Listing>.under(price: Int) =
     filter {
-        it.price.total.toLong() <= price
+        it.price.toLong() <= price
     }
 
 fun List<Listing>.seats(numOfSeats: Int) =
@@ -74,9 +75,9 @@ fun List<Event>.forDates(gameDays: List<LocalDate>) =
         gameDays.contains(it.time.toLocalDate())
     }
 
-fun List<Event>.vsing(opponents: List<Opponent>) =
+fun List<Event>.vsing(opponents: List<GenericOpponent>) =
     filter {
-        opponents.contains(it.opponent)
+        opponents.contains(it.team)
     }
 
 fun List<Listing>.notPressLevel() =

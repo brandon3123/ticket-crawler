@@ -26,10 +26,15 @@ gameFilters:
 #   - DAL # Seattle
 #   - VAN # Seattle
 
-# game time website config
+# game time config
 gameTime:
   baseUrl: "https://mobile.gametime.co"
   buyUrl: "https://gametime.co/nhl-hockey"
+
+# fans first config
+fansFirst:
+  baseUrl: "https://api-v2.fansfirst.ca"
+  buyUrl: "https://www.fansfirst.ca/games"
 
 # I tried implementing seat geek integration, but you have to pay for "real" features
 # maybe I'll do that one day.....

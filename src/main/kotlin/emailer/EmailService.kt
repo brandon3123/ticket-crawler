@@ -1,6 +1,8 @@
 package emailer
 
 import config.EmailConfig
+import model.Ticket
+import model.TicketId
 import util.log
 import java.util.*
 import javax.mail.Authenticator
@@ -13,25 +15,24 @@ import javax.mail.internet.InternetAddress
 import javax.mail.internet.MimeMessage
 
 class EmailService(
-    private val config: EmailConfig
+    private val config: EmailConfig,
+    private val emailBuilder: EmailBuilder
 ) {
 
     private val properties = getEmailProps()
 
-    fun sendEmailNotification(subject: String, emailParts: List<String>) {
+    fun sendEmailNotification(subject: String, tickets: Map<TicketId, List<Ticket>>) {
         // Create an email session
         val session = getSession()
 
         try {
+            val email = emailBuilder.toEmailBody(tickets)
+
             val message = MimeMessage(session)
             message.setFrom(InternetAddress(config.address))
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(config.recipients.joinToString()))
             message.subject = subject
-
-            // Build the email, simple html table for readability
-            val emailBody = emailParts.joinToString("</br></br>")
-
-            message.setContent(emailBody, "text/html")
+            message.setContent(email, "text/html")
 
             // Send the email
             Transport.send(message)

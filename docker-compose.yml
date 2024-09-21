@@ -1,0 +1,10 @@
+version: '3.9'
+
+services:
+  game-time-mocks:
+    ports:
+      - '10810:8080'
+    container_name: game-time-mocks
+    volumes:
+      - ./game_time_mocks/mappings:/home/wiremock/mappings/game_time_mocks
+    image: 'wiremock/wiremock:2.35.0'
