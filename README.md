@@ -3,6 +3,7 @@ Small Kotlin app that will allow me to query ticket sites and email me about low
 
 ## Supported Integrations
 - GameTime
+- FansFirst
 
 ## Supported Teams
 - Calgary Flames 
