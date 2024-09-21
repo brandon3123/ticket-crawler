@@ -1,8 +1,8 @@
 package model
 
-enum class Vendor {
-    GAME_TIME,
-    FANS_FIRST;
+enum class Vendor(val value: String) {
+    GAME_TIME("Game Time"),
+    FANS_FIRST("Fans First");
 
     companion object {
 
