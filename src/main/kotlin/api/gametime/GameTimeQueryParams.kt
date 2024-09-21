@@ -1,8 +1,8 @@
 package api.gametime
 
 const val FLAMES_GAMES_PARAMS = "?performer_slug=nhlclg" +
-        "&page=1" +
-        "&per_page=15" +
+//        "&page=1" +
+        "&per_page=100" +
         "&venue_slug" +
         "&primary_performer_id" +
         "&id" +

@@ -38,7 +38,7 @@ enum class NHLTeam(val team: String) {
     MTL("Montreal Canadiens"),
     NJ("New Jersey Devils"),
     NYI("New York Islanders"),
-    NYR("New York Rangers"),
+    NY("New York Rangers"),
     OTT("Ottawa Senators"),
     PHI("Philadelphia Flyers"),
     PIT("Pittsburgh Penguins"),
