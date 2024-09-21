@@ -75,8 +75,9 @@ class FansFirstService(
             it.price.toLong() <= price
         }
 
-    private fun List<Listing>.seats(numOfSeats: Int) =
-        filter {
-            it.numOfSeats == numOfSeats
+    private fun List<Listing>.seats(numOfSeats: Int): List<Listing> {
+        return filter {
+            it.numOfSeats == numOfSeats && it.sellOptions?.contains(numOfSeats) == true
         }
+    }
 }

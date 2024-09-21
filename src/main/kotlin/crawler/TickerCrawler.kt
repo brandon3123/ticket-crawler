@@ -39,7 +39,9 @@ class TickerCrawler(
         // Fetch tickets from vendors async
         val ticketsForVendors = coroutineScope {
             workers.map {
-                async { it.service.calgaryFlamesTickets(gameFilters) }
+                async {
+                    it.service.calgaryFlamesTickets(gameFilters)
+                }
             }.awaitAll()
         }
 
@@ -52,12 +54,9 @@ class TickerCrawler(
             val tickets = combinedTickets[ticketId]
 
             if (tickets != null) {
-                val seats = tickets.map { t -> t.vendorListing } + listings
-                seats.sortedBy { it.price }
-
-                val finalTickets = seats.map { Ticket(event, it) }
-
-                combinedTickets[ticketId] = finalTickets
+                val toAdd = listings.map { Ticket(event, it) }
+                val combined = tickets + toAdd
+                combinedTickets[ticketId] = combined
             } else {
                 combinedTickets[ticketId] = listings.map { Ticket(event, it) }
             }

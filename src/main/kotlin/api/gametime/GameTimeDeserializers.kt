@@ -76,8 +76,6 @@ class ListingsDeserializer(
     ): ArrayList<Listing> {
         val listingsResponse = json?.asJsonObject?.getAsJsonObject("listings") ?: JsonObject()
 
-        println("game time list")
-
         val listings = listingsResponse
             .entrySet()
             .map { (_, listingJson) ->

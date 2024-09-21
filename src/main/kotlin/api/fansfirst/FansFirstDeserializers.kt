@@ -64,8 +64,6 @@ class ListingsDeserializer(exchangeRate: ExchangeRate) : JsonDeserializer<ArrayL
     ): ArrayList<Listing> {
         val listingsResponse = json?.asJsonArray ?: JsonArray()
 
-        println("fan first list")
-
         val listings = listingsResponse
             .map { listingJson ->
                 // Get the listing data
@@ -81,14 +79,19 @@ class ListingsDeserializer(exchangeRate: ExchangeRate) : JsonDeserializer<ArrayL
 
                 val spot = Spot(row, section)
 
-                val numOfSeats = listingJson.asJsonObject["sellOption"]?.asInt ?: 0
+                val numOfSeats = listingJson.asJsonObject["noOfSeats"]?.asInt ?: 0
+
+                val sellOptionsJson = listingJson.asJsonObject["quantityOptions"].asJsonArray ?: JsonArray()
+
+                val sellOptions = sellOptionsJson.map { it.asInt }
 
                 Listing(
                     id = id,
                     price = price,
                     spot = spot,
                     numOfSeats = numOfSeats,
-                    vendor = Vendor.FANS_FIRST
+                    vendor = Vendor.FANS_FIRST,
+                    sellOptions = sellOptions
                 )
             }
 
