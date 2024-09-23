@@ -25,9 +25,9 @@ enum class NHLTeam(val team: String) {
     NSH("Nashville Predators"),
     SEA("Seattle Kraken"),
     SJ("San Jose Sharks"),
-    STL("St.Louis Blues"),
+    STL("St. Louis Blues"),
     VAN("Vancouver Canucks"),
-    VGK("Vegas Golden Knights"),
+    LAV("Vegas Golden Knights"),
     WPG("Winnipeg Jets"),
     BOS("Boston Bruins"),
     BUF("Buffalo Sabres"),
@@ -42,9 +42,9 @@ enum class NHLTeam(val team: String) {
     OTT("Ottawa Senators"),
     PHI("Philadelphia Flyers"),
     PIT("Pittsburgh Penguins"),
-    TB("Tamp Bay Lightning"),
+    TB("Tampa Bay Lightning"),
     TOR("Toronto Maple Leafs"),
-    WSH("Washington Capitals"),
+    WAS("Washington Capitals"),
     WIN("Winnipeg Jets"),
     UNKNOWN("unknown");
 }
