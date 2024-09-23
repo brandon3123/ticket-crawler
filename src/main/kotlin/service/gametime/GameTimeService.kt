@@ -6,8 +6,11 @@ import model.Vendor
 import model.Event
 import model.GamesWithSeats
 import model.Listing
-import model.NHLTeam as GenericOpponent
-import java.time.LocalDate
+import service.forDates
+import service.sections
+import service.under
+import service.underRow
+import service.vsing
 
 class GameTimeService(
     private val api: GameTimeApi
@@ -57,30 +60,18 @@ private fun List<Listing>.filterSeats(gameFilters: GameFilters): List<Listing> {
         .seats(gameFilters.seats)
         .under(gameFilters.maxPrice)
 
+    gameFilters.sections?.let { filteredSeats = filteredSeats.sections(it) }
+    gameFilters.maxRow?.let { filteredSeats = filteredSeats.underRow(it) }
+
     return filteredSeats
 }
 
-fun List<Listing>.under(price: Int) =
-    filter {
-        it.price.toLong() <= price
-    }
-
-fun List<Listing>.seats(numOfSeats: Int) =
+private fun List<Listing>.seats(numOfSeats: Int) =
     filter {
         it.numOfSeats == numOfSeats
     }
 
-fun List<Event>.forDates(gameDays: List<LocalDate>) =
-    filter {
-        gameDays.contains(it.time.toLocalDate())
-    }
-
-fun List<Event>.vsing(opponents: List<GenericOpponent>) =
-    filter {
-        opponents.contains(it.team)
-    }
-
-fun List<Listing>.notPressLevel() =
+private fun List<Listing>.notPressLevel() =
     filter {
         !it.spot.section.startsWith("PL")
     }

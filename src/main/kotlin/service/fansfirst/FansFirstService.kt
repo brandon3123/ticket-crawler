@@ -6,8 +6,11 @@ import model.Vendor
 import model.Event
 import model.Listing
 import model.GamesWithSeats
-import model.NHLTeam
-import java.time.LocalDate
+import service.forDates
+import service.sections
+import service.under
+import service.underRow
+import service.vsing
 
 class FansFirstService(
     private val api: FansFirstApi
@@ -52,27 +55,15 @@ class FansFirstService(
             .seats(gameFilters.seats)
             .under(gameFilters.maxPrice)
 
+        gameFilters.sections?.let { filteredSeats = filteredSeats.sections(it) }
+        gameFilters.maxRow?.let { filteredSeats = filteredSeats.underRow(it) }
+
         return filteredSeats
     }
-
-    fun List<Event>.forDates(gameDays: List<LocalDate>) =
-        filter {
-            gameDays.contains(it.time.toLocalDate())
-        }
-
-    fun List<Event>.vsing(opponents: List<NHLTeam>) =
-        filter {
-            opponents.contains(it.team)
-        }
 
     private fun List<Listing>.notPressLevel() =
         filter {
             it.zone != "Press Level"
-        }
-
-    private fun List<Listing>.under(price: Int) =
-        filter {
-            it.price.toLong() <= price
         }
 
     private fun List<Listing>.seats(numOfSeats: Int): List<Listing> {

@@ -77,6 +77,8 @@ class ListingsDeserializer(exchangeRate: ExchangeRate) : JsonDeserializer<ArrayL
                 val row = listingJson.asJsonObject["row"].asLong
                 val section = listingJson.asJsonObject["zoneNo"]?.asString ?: ""
 
+                val zone = listingJson.asJsonObject["zone"]?.asString ?: ""
+
                 val spot = Spot(row, section)
 
                 val numOfSeats = listingJson.asJsonObject["noOfSeats"]?.asInt ?: 0
@@ -91,7 +93,8 @@ class ListingsDeserializer(exchangeRate: ExchangeRate) : JsonDeserializer<ArrayL
                     spot = spot,
                     numOfSeats = numOfSeats,
                     vendor = Vendor.FANS_FIRST,
-                    sellOptions = sellOptions
+                    sellOptions = sellOptions,
+                    zone = zone
                 )
             }
 

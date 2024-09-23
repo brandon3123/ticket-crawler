@@ -20,6 +20,14 @@ gameFilters:
   teams:
     flames: true
     wranglers: false
+  maxRow: 10
+  sections:
+    lower:
+      from: 109
+      to: 120
+    upper:
+      from: 212
+      to: 226
   opponents:
     - SEA # Seattle
 #   - VGK # Vegas

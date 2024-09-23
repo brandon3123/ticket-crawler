@@ -82,7 +82,19 @@ data class GameFilters(
     @JsonFormat(pattern = "yyyy-MM-dd")
     val days: List<LocalDate>?,
     val teams: TeamFilters,
-    val opponents: List<NHLTeam>?
+    val opponents: List<NHLTeam>?,
+    val sections: Sections?,
+    val maxRow: Int?
+)
+
+data class Sections(
+    val lower: SectionRange,
+    val upper: SectionRange
+)
+
+data class SectionRange(
+    val from: Int,
+    val to: Int
 )
 
 data class TeamFilters(
