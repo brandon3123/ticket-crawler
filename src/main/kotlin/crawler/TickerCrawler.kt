@@ -18,7 +18,7 @@ class TickerCrawler(
     private val emailService: EmailService
 ) {
 
-    private val flamesEmailSubject = "Flames Games Tickets - Ticket Crawler"
+    private val flamesEmailSubject = "Flames Games Tickets - For the Red Mile Gang"
     private val wranglersEmailSubject = "Wrangles Games Tickets - Ticket Crawler"
 
     fun findTickets() {

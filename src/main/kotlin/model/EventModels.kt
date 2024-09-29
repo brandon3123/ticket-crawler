@@ -7,7 +7,12 @@ data class Event(
     val name: String,
     val time: LocalDateTime,
     val team: NHLTeam,
-    val vendor: Vendor
+    val vendor: Vendor,
+    val awayTeam: Performer? = null
+)
+
+data class Performer(
+    val shortName: String
 )
 
 

@@ -71,5 +71,5 @@ class EmailBuilder {
         </tr>"""
     }
 
-    private fun buyLink(href: String) = """<a href="$href" style="${EmailStyle.linkStyle}">Buy Tickets</a>"""
+    private fun buyLink(href: String) = """<a href="$href" style="${EmailStyle.linkStyle}">Purchase</a>"""
 }

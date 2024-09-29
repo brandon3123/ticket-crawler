@@ -10,6 +10,7 @@ import config.ExchangeRate
 import model.Event
 import model.Listing
 import model.NHLTeam
+import model.Performer
 import model.Spot
 import model.Vendor
 import java.lang.reflect.Type
@@ -44,19 +45,23 @@ class EventsDeserializer : JsonDeserializer<ArrayList<Event>> {
                 val localDateTime = LocalDateTime.parse(dateTime, formatter)
 
                 // Remove Calgary performers
-                performerJson?.removeAll { performer -> performer?.asJsonObject?.get("name")?.asString?.contains("Calgary") == true }
+                val opponent = performerJson?.find { performer -> performer?.asJsonObject?.get("name")?.asString?.contains("Calgary") == false }
 
                 // Get the abbreviation for the opponent of the Calgary based team
-                val team = performerJson[0].asJsonObject?.get("abbrev")?.asString?.let {
+                val team = opponent?.asJsonObject?.get("abbrev")?.asString?.let {
                     try {
                         NHLTeam.valueOf(it)} catch (e: Exception) {
                         NHLTeam.UNKNOWN}
                 } ?: NHLTeam.UNKNOWN
 
+                // Get the shortName for the away team
+                val awayTeam = opponent?.asJsonObject?.get("short_name")?.asString ?: ""
+
                 event.copy(
                     time = localDateTime,
                     team = team,
-                    vendor = Vendor.GAME_TIME
+                    vendor = Vendor.GAME_TIME,
+                    awayTeam = Performer(awayTeam.lowercase())
                 )
             }
 
